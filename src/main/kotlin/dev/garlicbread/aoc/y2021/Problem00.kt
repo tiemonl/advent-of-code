@@ -1,4 +1,7 @@
-package dev.garlicbread.aoc
+package dev.garlicbread.aoc.y2021
+
+import dev.garlicbread.aoc.Puzzle
+import dev.garlicbread.aoc.solve
 
 fun main() = solve { Problem0() }
 
