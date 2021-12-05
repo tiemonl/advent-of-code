@@ -1,6 +1,7 @@
 package dev.garlicbread.aoc.y2021
 
 import dev.garlicbread.aoc.Puzzle
+import dev.garlicbread.aoc.models.Point
 import dev.garlicbread.aoc.solve
 
 fun main() = solve { Problem02() }
@@ -44,10 +45,5 @@ class Problem02 : Puzzle<Int, Int>(2021, 2) {
         class Forward(amount: Int): Command(amount)
         class Down(amount: Int): Command(amount)
         class Up(amount: Int): Command(amount)
-    }
-
-    data class Point(val x: Int, val y: Int) {
-        operator fun plus(point: Point) = Point(x + point.x, y + point.y)
-        operator fun times(point: Point) = Point(x * point.x, y * point.y)
     }
 }
