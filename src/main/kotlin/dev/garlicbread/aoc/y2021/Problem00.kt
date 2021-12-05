@@ -3,10 +3,15 @@ package dev.garlicbread.aoc.y2021
 import dev.garlicbread.aoc.Puzzle
 import dev.garlicbread.aoc.solve
 
-fun main() = solve { Problem0() }
+fun main() = solve { Problem0() } // TODO: change class name call
 
-class Problem0 : Puzzle<Int, Int>(2021, 0) {
-    override val input = rawInput.map { it.toInt ()}
+// TODO: change class name to match problem number and day number
+class Problem0 : Puzzle<Int, Int>(
+    year = 2021,
+    day = 0,
+    sample = false
+) {
+    override val input = rawInput.map { it.toInt() }
 
     override fun solvePartOne(): Int {
         return 0
