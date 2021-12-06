@@ -1,7 +1,6 @@
 package dev.garlicbread.aoc.models
 
 import dev.garlicbread.aoc.utils.gcd
-import dev.garlicbread.aoc.y2021.Problem02
 import kotlin.math.absoluteValue
 
 data class Point(

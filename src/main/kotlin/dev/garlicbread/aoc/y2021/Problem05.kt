@@ -24,15 +24,15 @@ class Problem05 : Puzzle<Int, Int>(
     }
 
     override fun solvePartTwo(): Int {
-        val slopes45degree = listOf(Point(1,1), Point(1, -1), Point(-1, 1), Point(-1, -1))
+        val slopes45degree = listOf(Point(1, 1), Point(1, -1), Point(-1, 1), Point(-1, -1))
         val vents = mutableListOf<Pair<Point, Point>>()
         vents.addAll(findNonDiagonalLines())
-        vents.addAll(input.filter { line -> slopes45degree.contains(  line.first.slope(line.second) )})
+        vents.addAll(input.filter { line -> slopes45degree.contains(line.first.slope(line.second)) })
         val spots = mutableListOf<Point>()
         vents.forEach { vent ->
             spots.addAll(vent.first.pointsInBetween(vent.second))
         }
-        return spots.groupingBy { it }.eachCount().filter { it.value>= 2 }.entries.size
+        return spots.groupingBy { it }.eachCount().filter { it.value >= 2 }.entries.size
     }
 
     private fun parseInput(): List<Pair<Point, Point>> {

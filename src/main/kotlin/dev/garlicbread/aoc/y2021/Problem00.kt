@@ -3,7 +3,9 @@ package dev.garlicbread.aoc.y2021
 import dev.garlicbread.aoc.Puzzle
 import dev.garlicbread.aoc.solve
 
-fun main() = solve { Problem0() } // TODO: change class name call
+fun main() = solve(
+    benchmark = true
+) { Problem0() } // TODO: change class name call
 
 // TODO: change class name to match problem number and day number
 class Problem0 : Puzzle<Int, Int>(

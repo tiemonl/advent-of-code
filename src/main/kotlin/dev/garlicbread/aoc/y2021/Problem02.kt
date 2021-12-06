@@ -4,13 +4,15 @@ import dev.garlicbread.aoc.Puzzle
 import dev.garlicbread.aoc.models.Point
 import dev.garlicbread.aoc.solve
 
-fun main() = solve { Problem02() }
+fun main() = solve(
+    benchmark = true
+) { Problem02() }
 
 class Problem02 : Puzzle<Int, Int>(2021, 2) {
-    override val input = rawInput.map { it.toCommand()}
+    override val input = rawInput.map { it.toCommand() }
 
     override fun solvePartOne(): Int {
-        return input.fold(Point(0,0)) { acc, command ->
+        return input.fold(Point(0, 0)) { acc, command ->
             when (command) {
                 is Command.Down -> acc + Point(0, command.amount)
                 is Command.Forward -> acc + Point(command.amount, 0)
@@ -20,7 +22,7 @@ class Problem02 : Puzzle<Int, Int>(2021, 2) {
     }
 
     override fun solvePartTwo(): Int {
-        return input.fold(Pair(Point(0,0), 0)) { (location, aim), command ->
+        return input.fold(Pair(Point(0, 0), 0)) { (location, aim), command ->
             when (command) {
                 is Command.Down -> location to aim + command.amount
                 is Command.Forward -> location + Point(command.amount, aim * command.amount) to aim
@@ -42,8 +44,8 @@ class Problem02 : Puzzle<Int, Int>(2021, 2) {
     }
 
     sealed class Command(val amount: Int) {
-        class Forward(amount: Int): Command(amount)
-        class Down(amount: Int): Command(amount)
-        class Up(amount: Int): Command(amount)
+        class Forward(amount: Int) : Command(amount)
+        class Down(amount: Int) : Command(amount)
+        class Up(amount: Int) : Command(amount)
     }
 }

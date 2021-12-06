@@ -4,7 +4,9 @@ import dev.garlicbread.aoc.Puzzle
 import dev.garlicbread.aoc.solve
 import dev.garlicbread.aoc.transpose
 
-fun main() = solve { Problem04() }
+fun main() = solve(
+    benchmark = true
+) { Problem04() }
 
 class Problem04 : Puzzle<Int, Int>(
     year = 2021,
