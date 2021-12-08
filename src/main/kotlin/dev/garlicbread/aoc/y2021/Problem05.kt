@@ -4,7 +4,9 @@ import dev.garlicbread.aoc.Puzzle
 import dev.garlicbread.aoc.models.Point
 import dev.garlicbread.aoc.solve
 
-fun main() = solve { Problem05() }
+fun main() = solve(
+    benchmark = true
+) { Problem05() }
 
 
 class Problem05 : Puzzle<Int, Int>(
