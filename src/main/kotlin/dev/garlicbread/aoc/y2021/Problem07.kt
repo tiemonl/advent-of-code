@@ -4,6 +4,7 @@ import dev.garlicbread.aoc.Puzzle
 import dev.garlicbread.aoc.solve
 import dev.garlicbread.aoc.utils.median
 import kotlin.math.abs
+import kotlin.math.roundToInt
 
 fun main() = solve(
     benchmark = true
@@ -22,8 +23,8 @@ class Problem07 : Puzzle<Int, Int>(
     }
 
     override fun solvePartTwo(): Int {
-        val mean = input.average().toInt()
-        // return (0..input.maxOf { it }).minOf { dest -> input.sumOf { ((abs(it-dest))*(abs(it -dest).inc()))/2 } }
-        return input.sumOf { ((abs(it - mean)) * (abs(it - mean) + 1)) / 2 }
+        val avg = input.average().roundToInt()
+        val meanRange = listOf(avg.dec(), avg, avg.inc())
+        return meanRange.minOf { mean -> input.sumOf { ((abs(it - mean)) * (abs(it - mean) + 1)) / 2 } }
     }
 }
