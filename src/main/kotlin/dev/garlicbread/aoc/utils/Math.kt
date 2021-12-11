@@ -11,3 +11,10 @@ fun median(list: List<Int>) = list.sorted().let {
     else
         it[it.size / 2]
 }
+
+fun median(list: List<Long>) = list.sorted().let {
+    if (it.size % 2 == 0)
+        (it[it.size / 2] + it[(it.size - 1) / 2]) / 2
+    else
+        it[it.size / 2]
+}
