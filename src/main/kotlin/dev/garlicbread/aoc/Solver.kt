@@ -35,7 +35,7 @@ private fun benchmark(block: () -> Puzzle<*, *>) {
     var partOneTime = 0L
     var partTwoTime = 0L
     var times = 0
-    while (times < 50000) {
+    while (times < 1000) {
         times++
         if (times % 100 == 0) print("\rBenchmarking... ($times runs)")
         lateinit var p: Puzzle<*, *>
