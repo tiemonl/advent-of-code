@@ -18,3 +18,5 @@ fun median(list: List<Long>) = list.sorted().let {
     else
         it[it.size / 2]
 }
+
+fun gauss(n: Int) = (n * (n + 1)) / 2
