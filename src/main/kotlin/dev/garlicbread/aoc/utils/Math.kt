@@ -20,3 +20,12 @@ fun median(list: List<Long>) = list.sorted().let {
 }
 
 fun gauss(n: Int) = (n * (n + 1)) / 2
+
+fun IntRange.intersects(other: IntRange): Boolean =
+    first <= other.last && last >= other.first
+
+fun IntRange.intersect(other: IntRange): IntRange =
+    maxOf(first, other.first)..minOf(last, other.last)
+
+fun IntRange.size(): Int =
+    last - first + 1
