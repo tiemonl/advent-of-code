@@ -12,8 +12,7 @@ fun main() = solve(
 
 class Problem07 : Puzzle<Int, Int>(
     year = 2021,
-    day = 7,
-    sample = false
+    day = 7
 ) {
     override val input = rawInput.flatMap { it.split(",").map { it.toInt() } }
 

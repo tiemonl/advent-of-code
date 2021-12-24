@@ -7,8 +7,11 @@ fun main() = solve(
     benchmark = true
 ) { Problem03() }
 
-class Problem03 : Puzzle<Int, Int>(2021, 3) {
-    override val input = rawInput.map { it.toString() }
+class Problem03 : Puzzle<Int, Int>(
+    year = 2021,
+    day = 3
+) {
+    override val input = rawInput
 
     override fun solvePartOne(): Int {
         val lengthOfBinary = input[0].length
@@ -18,7 +21,7 @@ class Problem03 : Puzzle<Int, Int>(2021, 3) {
             gamma += if (input.count { it[i] == '1' } > input.size / 2) "1" else "0"
             epsilon += (1 - gamma[i].digitToInt()).toString()
         }
-        return epsilon.toInt(2).times(gamma.toInt(2)).toInt()
+        return epsilon.toInt(2).times(gamma.toInt(2))
     }
 
     override fun solvePartTwo(): Int {

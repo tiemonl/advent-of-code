@@ -11,8 +11,7 @@ fun main() = solve(
 
 class Problem20 : Puzzle<Int, Int>(
     year = 2021,
-    day = 20,
-    sample = false
+    day = 20
 ) {
     override val input = TrenchMap(
         algorithm = rawInput.first().map { if (it == '#') 1 else 0 },

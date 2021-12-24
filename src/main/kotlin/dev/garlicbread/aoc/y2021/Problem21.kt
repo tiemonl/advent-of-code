@@ -9,8 +9,7 @@ fun main() = solve(
 
 class Problem21 : Puzzle<Int, Long>(
     year = 2021,
-    day = 21,
-    sample = false
+    day = 21
 ) {
     override val input = rawInput.map { it.substringAfterLast(": ").toInt() }
 

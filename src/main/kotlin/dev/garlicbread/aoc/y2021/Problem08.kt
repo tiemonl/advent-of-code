@@ -9,8 +9,7 @@ fun main() = solve(
 
 class Problem08 : Puzzle<Int, Int>(
     year = 2021,
-    day = 8,
-    sample = false
+    day = 8
 ) {
     override val input: List<Pair<String, String>> = rawInput.map { it.split(" | ") }.map { Pair(it[0], it[1]) }
 

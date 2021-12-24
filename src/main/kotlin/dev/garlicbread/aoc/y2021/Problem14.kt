@@ -9,8 +9,7 @@ fun main() = solve(
 
 class Problem14 : Puzzle<Long, Long>(
     year = 2021,
-    day = 14,
-    sample = false
+    day = 14
 ) {
     override val input = rawInput.joinToString("\n").split("\n\n")
     private lateinit var polymer: MutableMap<String, Long>
@@ -38,7 +37,7 @@ class Problem14 : Puzzle<Long, Long>(
     private fun fillPolymer(polymer: Map<String, Long>, score: MutableMap<Char, Long>): MutableMap<String, Long> {
         val newPolymer = mutableMapOf<String, Long>()
         polymer.forEach { (pair, count) ->
-            val rule = rules.first{ it.first == pair}.second
+            val rule = rules.first { it.first == pair }.second
             val firstPair = "${pair.first()}${rule}"
             val secondPair = "${rule}${pair.last()}"
             newPolymer[firstPair] = newPolymer.getOrDefault(firstPair, 0).plus(count)
@@ -47,6 +46,7 @@ class Problem14 : Puzzle<Long, Long>(
         }
         return newPolymer
     }
+
     private fun getScore() = score.maxOf { it.value } - score.minOf { it.value }
 
     private fun parseInput() {

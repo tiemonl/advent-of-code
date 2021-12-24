@@ -10,8 +10,7 @@ fun main() = solve(
 
 class Problem15 : Puzzle<Int, Int>(
     year = 2021,
-    day = 15,
-    sample = false
+    day = 15
 ) {
     override val input = rawInput.map { list ->
         list.map { risk ->

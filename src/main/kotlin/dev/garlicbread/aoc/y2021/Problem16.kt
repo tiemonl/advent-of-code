@@ -9,8 +9,7 @@ fun main() = solve(
 
 class Problem16 : Puzzle<Int, Long>(
     year = 2021,
-    day = 16,
-    sample = false
+    day = 16
 ) {
     override val input = rawInput.first().hexToBinary()
 

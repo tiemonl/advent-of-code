@@ -1,7 +1,8 @@
 package dev.garlicbread.aoc
 
-abstract class Puzzle<T, U>(val year: Int, val day: Int, val sample: Boolean = false) {
-    val rawInput = getInput(year, day, sample)
+abstract class Puzzle<T, U>(val year: Int, val day: Int) {
+    val rawInput = Solver.inputProvider(year, day)
+
     abstract val input: Any
 
     abstract fun solvePartOne(): T

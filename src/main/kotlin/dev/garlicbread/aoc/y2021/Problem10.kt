@@ -7,13 +7,11 @@ import java.util.*
 
 fun main() = solve(
     benchmark = true
-) { Problem10() } // TODO: change class name call
+) { Problem10() }
 
-// TODO: change class name to match problem number and day number
 class Problem10 : Puzzle<Int, Long>(
     year = 2021,
-    day = 10,
-    sample = false
+    day = 10
 ) {
     override val input = rawInput
 
@@ -69,8 +67,13 @@ class Problem10 : Puzzle<Int, Long>(
         return scores
     }
 
-    private fun getOppositeChar(char: Char) = if (char == ')') '(' else if (char == '}') '{' else if (char == ']') '[' else  if (char == '>') '<'
-    else if (char == '(') ')' else if (char == '{') '}' else if (char == '[') ']' else '>'
-    private fun getCharValue(char: Char) = if (char == ')') 3 else if (char == '}') 1197 else if (char == ']') 57 else 25137
-    private fun getCharValuePart2(char: Char) = if (char == ')') 1 else if (char == '}') 3 else if (char == ']') 2 else 4
+    private fun getOppositeChar(char: Char) =
+        if (char == ')') '(' else if (char == '}') '{' else if (char == ']') '[' else if (char == '>') '<'
+        else if (char == '(') ')' else if (char == '{') '}' else if (char == '[') ']' else '>'
+
+    private fun getCharValue(char: Char) =
+        if (char == ')') 3 else if (char == '}') 1197 else if (char == ']') 57 else 25137
+
+    private fun getCharValuePart2(char: Char) =
+        if (char == ')') 1 else if (char == '}') 3 else if (char == ']') 2 else 4
 }

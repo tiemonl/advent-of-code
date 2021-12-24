@@ -11,8 +11,7 @@ fun main() = solve(
 
 class Problem05 : Puzzle<Int, Int>(
     year = 2021,
-    day = 5,
-    sample = false
+    day = 5
 ) {
     override val input = parseInput()
 

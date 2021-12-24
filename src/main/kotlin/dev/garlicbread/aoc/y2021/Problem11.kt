@@ -10,8 +10,7 @@ fun main() = solve(
 
 class Problem11 : Puzzle<Int, Int>(
     year = 2021,
-    day = 11,
-    sample = false
+    day = 11
 ) {
     override val input = rawInput.map { it.toList().map { char -> char.digitToInt() } }
 

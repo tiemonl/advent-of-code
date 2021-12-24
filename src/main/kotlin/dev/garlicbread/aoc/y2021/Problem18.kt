@@ -9,8 +9,7 @@ fun main() = solve(
 
 class Problem18 : Puzzle<Int, Int>(
     year = 2021,
-    day = 18,
-    sample = false
+    day = 18
 ) {
     override val input = rawInput.map { parse(it) }
 
