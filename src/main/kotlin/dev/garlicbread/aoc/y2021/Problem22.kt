@@ -12,8 +12,7 @@ fun main() = solve(
 
 class Problem22 : Puzzle<Long, Long>(
     year = 2021,
-    day = 22,
-    sample = false
+    day = 22
 ) {
     override val input = rawInput.map { Cuboid.parse(it) }
     private val part1Cube = Cuboid(true, -50..50, -50..50, -50..50)

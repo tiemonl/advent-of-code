@@ -9,8 +9,7 @@ fun main() = solve(
 
 class Problem06 : Puzzle<Long, Long>(
     year = 2021,
-    day = 6,
-    sample = false
+    day = 6
 ) {
     override val input = rawInput.flatMap { it.split(",").map { value -> value.toInt() } }
 

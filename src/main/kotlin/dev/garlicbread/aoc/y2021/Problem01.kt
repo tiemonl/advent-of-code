@@ -7,7 +7,10 @@ fun main() = solve(
     benchmark = true
 ) { Problem01() }
 
-class Problem01 : Puzzle<Int, Int>(2021, 1) {
+class Problem01 : Puzzle<Int, Int>(
+    year = 2021,
+    day = 1
+) {
     override val input = rawInput.map { it.toInt() }
 
     override fun solvePartOne(): Int {

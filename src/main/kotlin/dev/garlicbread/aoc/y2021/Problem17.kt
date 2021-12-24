@@ -11,8 +11,7 @@ fun main() = solve(
 
 class Problem17 : Puzzle<Int, Int>(
     year = 2021,
-    day = 17,
-    sample = false
+    day = 17
 ) {
     override val input = Regex("""target area: x=(\d+)\.\.(\d+), y=(-\d+)\.\.(-\d+)""").matchEntire(rawInput.first())!!
         .destructured.let { (minX, maxX, minY, maxY) ->

@@ -11,8 +11,7 @@ fun main() = solve(
 
 class Problem19 : Puzzle<Int, Int>(
     year = 2021,
-    day = 19,
-    sample = false
+    day = 19
 ) {
     override val input = parseInput(rawInput.joinToString("\n"))
     private val scannerSectors = findScannersSectorsPairs(input)
@@ -27,9 +26,9 @@ class Problem19 : Puzzle<Int, Int>(
 
     private fun findScannersSectorsPairs(scanners: List<Set<Point3d>>): Pair<MutableSet<Point3d>, MutableSet<Point3d>> {
         val baseSector = scanners.first().toMutableSet()
-        val foundScanners = mutableSetOf(Point3d(0,0,0))
+        val foundScanners = mutableSetOf(Point3d(0, 0, 0))
         val unmappedSectors = ArrayDeque<Set<Point3d>>().apply { addAll(scanners.drop(1)) }
-        while(unmappedSectors.isNotEmpty()) {
+        while (unmappedSectors.isNotEmpty()) {
             val thisSector = unmappedSectors.removeFirst()
             when (val scannerBeacons = findScannerBeaconsIfIntersects(baseSector, thisSector)) {
                 null -> unmappedSectors.add(thisSector)

@@ -10,8 +10,7 @@ fun main() = solve(
 
 class Problem13 : Puzzle<Int, String>(
     year = 2021,
-    day = 13,
-    sample = false
+    day = 13
 ) {
     override val input = rawInput.joinToString("\n").split("\n\n")
     private lateinit var paper: Set<Point>

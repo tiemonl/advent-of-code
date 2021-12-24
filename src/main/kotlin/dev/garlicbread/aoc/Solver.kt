@@ -4,20 +4,27 @@ import java.nio.file.Files
 import java.nio.file.Paths
 import kotlin.system.measureNanoTime
 
+object Solver {
+    var suffix: String = ""
+
+    val defaultInputProvider: (year: Int, day: Int) -> List<String> = { year, day ->
+        Puzzle::class.java.classLoader
+            ?.getResource("$year/input$day$suffix.in")
+            ?.toURI()
+            ?.let { Paths.get(it) }
+            .let { Files.readAllLines(it) }
+    }
+
+    var inputProvider: (year: Int, day: Int) -> List<String> = defaultInputProvider
+}
+
 fun <T : Any, R : Any> solve(benchmark: Boolean = false, block: () -> Puzzle<T, R>) {
+    Solver.inputProvider = Solver.defaultInputProvider
     printResult(block)
     if (benchmark) {
         println()
         benchmark(block)
     }
-}
-
-fun getInput(year: Int, day: Int, sample: Boolean = false): List<String> {
-    val resource = if (!sample) "$year/puzzle/input$day.in" else "$year/sample/input$day.sample"
-    return Puzzle::class.java.classLoader.getResource(resource)
-        .toURI()
-        .let { Paths.get(it) }
-        .let { Files.readAllLines(it) }
 }
 
 fun <T : Any, R : Any> printResult(block: () -> Puzzle<T, R>) {

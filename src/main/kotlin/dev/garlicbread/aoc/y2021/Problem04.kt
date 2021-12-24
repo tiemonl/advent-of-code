@@ -10,8 +10,7 @@ fun main() = solve(
 
 class Problem04 : Puzzle<Int, Int>(
     year = 2021,
-    day = 4,
-    sample = false
+    day = 4
 ) {
     override val input = rawInput.joinToString("\n").split("\n\n")
     private val draw = mutableListOf<Int>()
