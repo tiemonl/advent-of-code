@@ -11,7 +11,7 @@ createtestfile() {
     exit 1
   fi
 
-  local puzzledir="src/test/kotlin/dev/garlicbread/aoc/$year/"
+  local puzzledir="src/test/kotlin/dev/garlicbread/aoc/y$year/"
   if [[ ! -e "$puzzledir" ]]; then
     mkdir "$puzzledir"
   fi
@@ -37,7 +37,7 @@ internal class Problem${paddedDay}Test : PuzzleTest<${type1}, ${type2}>() {
     }
 }" >"${file}"
 
-  local inputfolder=src/test/resources/y$year/
+  local inputfolder=src/test/resources/$year/
   local inputfile="${inputfolder}input${day}_1.in"
   if [[ -e $inputfile ]]; then
     read -p "File exists: ${inputfile}. Overwrite? (y/N) " -r overwrite
