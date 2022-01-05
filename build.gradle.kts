@@ -7,15 +7,15 @@ plugins {
 }
 
 group = "dev.garlicbread"
-version = "1.0-SNAPSHOT"
+version = "1.0"
 
 repositories {
     mavenCentral()
 }
 
 dependencies {
+    testImplementation("com.google.truth:truth:1.1.3")
     implementation("org.junit.jupiter:junit-jupiter:5.7.0")
-    testImplementation(kotlin("test"))
     implementation("org.jetbrains.kotlin:kotlin-stdlib-jdk8")
     implementation("org.jetbrains.kotlinx:kotlinx-serialization-json:1.3.1")
 }

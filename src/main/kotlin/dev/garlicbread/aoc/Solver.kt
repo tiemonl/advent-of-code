@@ -71,9 +71,9 @@ private fun printBenchmark(times: Int, initTime: Float, partOneTime: Float, part
 private fun printPartBenchmark(part: Int, time: Float, initTime: Float) {
     println(
         "Part $part took " +
-                "%.3fms".format(time).bold("33") +
-                ", including init: " +
-                "%.3fms".format((initTime + time)).bold("33")
+            "%.3fms".format(time).bold("33") +
+            ", including init: " +
+            "%.3fms".format((initTime + time)).bold("33")
     )
 }
 

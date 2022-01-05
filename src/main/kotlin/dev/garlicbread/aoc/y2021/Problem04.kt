@@ -74,8 +74,7 @@ class Problem04 : Puzzle<Int, Int>(
 
     private fun checkWin(bingo: Bingo) =
         bingo.board.asSequence().map { row -> row.all { it.isMarked } }.any { it } ||
-                bingo.transposedBoard.asSequence().map { col -> col.all { it.isMarked } }.any { it }
-
+            bingo.transposedBoard.asSequence().map { col -> col.all { it.isMarked } }.any { it }
 
     data class Bingo(
         val board: List<List<Cell>>,

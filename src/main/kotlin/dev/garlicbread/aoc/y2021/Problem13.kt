@@ -41,7 +41,7 @@ class Problem13 : Puzzle<Int, String>(
             Point(split[0].toInt(), split[1].toInt())
         }.toSet()
         folds = input[1].split("\n").map {
-            val split = it.split("=");
+            val split = it.split("=")
             when (split[0].last()) {
                 'x' -> Fold.X(split[1].toInt())
                 'y' -> Fold.Y(split[1].toInt())

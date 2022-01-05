@@ -1,13 +1,56 @@
 package dev.garlicbread.aoc.y2021
 
-import dev.garlicbread.aoc.PuzzleTest
+import com.google.common.truth.Truth.assertThat
+import dev.garlicbread.aoc.Solver
+import org.junit.jupiter.api.BeforeEach
+import org.junit.jupiter.api.DisplayName
+import org.junit.jupiter.api.Nested
 import org.junit.jupiter.api.Test
 
-internal class Problem17Test : PuzzleTest<Int, Int>() {
-    override val puzzle = { Problem17() }
+@DisplayName("2021 Day 17")
+internal class Problem17Test {
 
-    @Test
-    fun problem17_1() {
-        runTest("_1", 45, 112)
+    @BeforeEach
+    fun setUp() {
+        Solver.suffix = ""
+        Solver.inputProvider = Solver.defaultInputProvider
+    }
+
+    @Nested
+    @DisplayName("Part 1")
+    inner class Part1 {
+        @Test
+        @DisplayName("Example Input 1")
+        fun `Matches example 1`() {
+            Solver.suffix = "_1"
+            val answer = Problem17().solvePartOne()
+            assertThat(answer).isEqualTo(45)
+        }
+
+        @Test
+        @DisplayName("Actual Input")
+        fun `Matches actual`() {
+            val answer = Problem17().solvePartOne()
+            assertThat(answer).isEqualTo(15400)
+        }
+    }
+
+    @Nested
+    @DisplayName("Part 2")
+    inner class Part2 {
+        @Test
+        @DisplayName("Example Input 1")
+        fun `Matches example 1`() {
+            Solver.suffix = "_1"
+            val answer = Problem17().solvePartTwo()
+            assertThat(answer).isEqualTo(112)
+        }
+
+        @Test
+        @DisplayName("Actual Input")
+        fun `Matches actual`() {
+            val answer = Problem17().solvePartTwo()
+            assertThat(answer).isEqualTo(5844)
+        }
     }
 }
