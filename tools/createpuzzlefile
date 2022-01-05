@@ -21,7 +21,7 @@ createpuzzlefile() {
   local file="${puzzledir}Problem$paddedDay.kt"
   if [[ -e $file ]]; then
     read -p "File exists: ${file}. Overwrite? (y/N) " -r overwrite
-    [[ "$overwrite" =~ ^[yY]$ ]] || return 1
+    [[ "$overwrite" =~ ^[yY]$ ]] || return 0
   fi
 
   echo "Creating puzzle class: $file"

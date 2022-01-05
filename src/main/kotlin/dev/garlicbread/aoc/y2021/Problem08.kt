@@ -54,5 +54,4 @@ class Problem08 : Puzzle<Int, Int>(
 
     private fun String.overlaps(that: Set<Char>): Boolean = this.toSet().containsAll(that)
     private fun Set<Char>.overlaps(that: Set<Char>): Boolean = this.containsAll(that)
-
 }

@@ -25,15 +25,58 @@ createtestfile() {
   echo "Creating test class: $file"
   echo "package dev.garlicbread.aoc.y${year}
 
-import dev.garlicbread.aoc.PuzzleTest
+import com.google.common.truth.Truth.assertThat
+import dev.garlicbread.aoc.Solver
+import org.junit.jupiter.api.BeforeEach
+import org.junit.jupiter.api.DisplayName
+import org.junit.jupiter.api.Nested
 import org.junit.jupiter.api.Test
 
-internal class Problem${paddedDay}Test : PuzzleTest<${type1}, ${type2}>() {
-    override val puzzle = { Problem${paddedDay}() }
+@DisplayName(\"$year Day $day\")
+internal class Problem${paddedDay}Test {
 
-    @Test
-    fun problem${paddedDay}_1() {
-        runTest(\"_1\", 0, 0)
+    @BeforeEach
+    fun setUp() {
+        Solver.suffix = \"\"
+        Solver.inputProvider = Solver.defaultInputProvider
+    }
+
+    @Nested
+    @DisplayName(\"Part 1\")
+    inner class Part1 {
+        @Test
+        @DisplayName(\"Example Input 1\")
+        fun \`Matches example 1\`() {
+            Solver.suffix = \"_1\"
+            val answer = Problem${paddedDay}().solvePartOne()
+            assertThat(answer).isEqualTo(TODO())
+        }
+
+        @Test
+        @DisplayName(\"Actual Input\")
+        fun \`Matches actual\`() {
+            val answer = Problem${paddedDay}().solvePartOne()
+            assertThat(answer).isEqualTo(TODO())
+        }
+    }
+
+    @Nested
+    @DisplayName(\"Part 2\")
+    inner class Part2 {
+        @Test
+        @DisplayName(\"Example Input 1\")
+        fun \`Matches example 1\`() {
+            Solver.suffix = \"_1\"
+            val answer = Problem${paddedDay}().solvePartTwo()
+            assertThat(answer).isEqualTo(TODO())
+        }
+
+        @Test
+        @DisplayName(\"Actual Input\")
+        fun \`Matches actual\`() {
+            val answer = Problem${paddedDay}().solvePartTwo()
+            assertThat(answer).isEqualTo(TODO())
+        }
     }
 }" >"${file}"
 

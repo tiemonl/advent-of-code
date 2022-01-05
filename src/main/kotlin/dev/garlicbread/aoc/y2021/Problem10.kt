@@ -3,7 +3,7 @@ package dev.garlicbread.aoc.y2021
 import dev.garlicbread.aoc.Puzzle
 import dev.garlicbread.aoc.solve
 import dev.garlicbread.aoc.utils.median
-import java.util.*
+import java.util.Stack
 
 fun main() = solve(
     benchmark = true
@@ -50,8 +50,7 @@ class Problem10 : Puzzle<Int, Long>(
             }
             if (lineEnd.isNotEmpty()) unfinishedLineEndings.add(lineEnd)
         }
-        var score = calculateScore(unfinishedLineEndings)
-        return median(score)
+        return median(calculateScore(unfinishedLineEndings))
     }
 
     private fun calculateScore(unfinishedLineEndings: List<String>): List<Long> {
@@ -68,12 +67,30 @@ class Problem10 : Puzzle<Int, Long>(
     }
 
     private fun getOppositeChar(char: Char) =
-        if (char == ')') '(' else if (char == '}') '{' else if (char == ']') '[' else if (char == '>') '<'
-        else if (char == '(') ')' else if (char == '{') '}' else if (char == '[') ']' else '>'
+        when (char) {
+            ')' -> '('
+            '}' -> '{'
+            ']' -> '['
+            '>' -> '<'
+            '(' -> ')'
+            '{' -> '}'
+            '[' -> ']'
+            else -> '>'
+        }
 
     private fun getCharValue(char: Char) =
-        if (char == ')') 3 else if (char == '}') 1197 else if (char == ']') 57 else 25137
+        when (char) {
+            ')' -> 3
+            '}' -> 1197
+            ']' -> 57
+            else -> 25137
+        }
 
     private fun getCharValuePart2(char: Char) =
-        if (char == ')') 1 else if (char == '}') 3 else if (char == ']') 2 else 4
+        when (char) {
+            ')' -> 1
+            '}' -> 3
+            ']' -> 2
+            else -> 4
+        }
 }

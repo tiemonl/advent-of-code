@@ -17,7 +17,6 @@ class Problem18 : Puzzle<Int, Int>(
         SnailFishNumber.SnailPair(acc, i).apply { reduce() }
     }.magnitude()
 
-
     override fun solvePartTwo(): Int {
         var max = 0
         for (i in 0..rawInput.map { parse(it) }.size.dec()) {
@@ -80,7 +79,6 @@ class Problem18 : Puzzle<Int, Int>(
             override fun addToLeftMost(value: Int) = left.addToLeftMost(value)
 
             override fun addToRightMost(value: Int) = right.addToRightMost(value)
-
 
             override fun split(): Boolean {
                 if (left is Regular) {
@@ -153,5 +151,4 @@ class Problem18 : Puzzle<Int, Int>(
             override fun toString() = "$value"
         }
     }
-
 }

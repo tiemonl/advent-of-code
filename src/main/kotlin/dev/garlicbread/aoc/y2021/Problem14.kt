@@ -28,7 +28,8 @@ class Problem14 : Puzzle<Long, Long>(
     }
 
     override fun solvePartTwo(): Long {
-        repeat(30) { // keep input from last time and start with ten steps already completed
+        parseInput()
+        repeat(40) {
             polymer = fillPolymer(polymer, score)
         }
         return getScore()
@@ -38,7 +39,7 @@ class Problem14 : Puzzle<Long, Long>(
         val newPolymer = mutableMapOf<String, Long>()
         polymer.forEach { (pair, count) ->
             val rule = rules.first { it.first == pair }.second
-            val firstPair = "${pair.first()}${rule}"
+            val firstPair = "${pair.first()}$rule"
             val secondPair = "${rule}${pair.last()}"
             newPolymer[firstPair] = newPolymer.getOrDefault(firstPair, 0).plus(count)
             newPolymer[secondPair] = newPolymer.getOrDefault(secondPair, 0).plus(count)

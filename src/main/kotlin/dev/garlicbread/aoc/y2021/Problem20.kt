@@ -1,9 +1,7 @@
 package dev.garlicbread.aoc.y2021
 
 import dev.garlicbread.aoc.Puzzle
-import dev.garlicbread.aoc.models.Point
 import dev.garlicbread.aoc.solve
-import kotlin.math.sqrt
 
 fun main() = solve(
     benchmark = false
@@ -14,43 +12,31 @@ class Problem20 : Puzzle<Int, Int>(
     day = 20
 ) {
     override val input = TrenchMap(
-        algorithm = rawInput.first().map { if (it == '#') 1 else 0 },
-        image = rawInput.drop(2).flatMapIndexed { y, line ->
-            line.mapIndexed { x, char -> Point(x, y) to if (char == '#') 1 else 0 }
-        }.toMap()
+        algorithm = rawInput.first().map { if (it == '#') '1' else '0' },
+        image = rawInput.drop(2).map { row -> row.map { if (it == '#') '1' else '0' }.joinToString("") }
     )
 
-    override fun solvePartOne() = enhance(2).values.count { it == 1 }
+    override fun solvePartOne() = enhance(2)
 
-    override fun solvePartTwo() = enhance(50).values.count { it == 1 }
+    override fun solvePartTwo() = enhance(50)
 
-    private fun enhance(times: Int) =
-        (1..times).fold(input.image to if (input.algorithm.first() == 0) 1 else 0) { (updatedImage, defaultValue), _ ->
-            updatedImage.applyAlgorithm(defaultValue) to if (defaultValue == 0) input.algorithm.first() else input.algorithm.last()
-        }.first
-
-    private fun Map<Point, Int>.applyAlgorithm(defaultValue: Int): Map<Point, Int> = buildMap {
-        val size = sqrt(this@applyAlgorithm.size.toDouble()).toInt()
-        for (col in -1..size) {
-            for (row in -1..size) {
-                this[Point(row + 1, col + 1)] =
-                    input.algorithm[neighbors(Point(row, col), this@applyAlgorithm, defaultValue)]
-            }
+    private fun enhance(steps: Int) = (0 until steps).fold(input.image) { image, step ->
+        val outside = when (input.algorithm.first() == '1') {
+            true -> if (step % 2 == 0) input.algorithm.last() else input.algorithm.first()
+            false -> '0'
         }
-    }
-
-    private fun neighbors(point: Point, image: Map<Point, Int>, defaultValue: Int) = buildString {
-        for (col in -1..1) {
-            for (row in -1..1) {
-                append(
-                    image[Point(point.x + row, point.y + col)] ?: defaultValue
-                )
-            }
+        (-1..image.size).map { y ->
+            (-1..image.first().length).map { x ->
+                (-1..1).flatMap { dy -> (-1..1).map { dx -> dy to dx } }
+                    .map { (dy, dx) -> y + dy to x + dx }
+                    .joinToString("") { (y, x) -> (image.getOrNull(y)?.getOrNull(x) ?: outside).toString() }
+                    .toInt(2).let { input.algorithm[it] }
+            }.joinToString("")
         }
-    }.toInt(2)
+    }.sumOf { row -> row.count { it == '1' } }
 
     data class TrenchMap(
-        val algorithm: List<Int>,
-        val image: Map<Point, Int>
+        val algorithm: List<Char>,
+        val image: List<String>
     )
 }

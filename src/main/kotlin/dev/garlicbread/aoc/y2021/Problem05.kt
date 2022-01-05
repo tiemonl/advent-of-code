@@ -8,7 +8,6 @@ fun main() = solve(
     benchmark = true
 ) { Problem05() }
 
-
 class Problem05 : Puzzle<Int, Int>(
     year = 2021,
     day = 5

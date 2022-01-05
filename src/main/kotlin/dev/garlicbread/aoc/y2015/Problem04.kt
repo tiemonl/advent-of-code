@@ -32,5 +32,4 @@ class Problem04 : Puzzle<Int, Int>(
         }
         return counter
     }
-
 }

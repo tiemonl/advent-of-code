@@ -18,7 +18,6 @@ class Problem23 : Puzzle<Int, Int>(
     private val initialState = State.from(rawInput)
     private val initialStatePart2 = State.from(rawInput.take(3) + "  #D#C#B#A#  " + "  #D#B#A#C#  " + rawInput.takeLast(2))
 
-
     override fun solvePartOne(): Int {
         return organizeAmphipods(initialState)
     }
@@ -70,12 +69,17 @@ class Problem23 : Puzzle<Int, Int>(
                     if (hallwayPathIsClear(it.index, room.index)) {
                         val y = room.content.lastIndexOf('.') + 1
                         val cost = (abs(it.index - room.index) + y) * multipliers.getValue(it.value)
-                        add(StateWithCost(State(
-                            config.map { row -> row.toMutableList() }.apply {
-                                get(0)[it.index] = '.'
-                                get(y)[room.index] = it.value
-                            }
-                        ), cost))
+                        add(
+                            StateWithCost(
+                                State(
+                                    config.map { row -> row.toMutableList() }.apply {
+                                        get(0)[it.index] = '.'
+                                        get(y)[room.index] = it.value
+                                    }
+                                ),
+                                cost
+                            )
+                        )
                     }
                 }
                 roomsWithWrongAmphipods().forEach { room ->
@@ -84,12 +88,17 @@ class Problem23 : Puzzle<Int, Int>(
                         if (hallwayPathIsClear(index, room.index)) {
                             val y = toMove.index + 1
                             val cost = (abs(room.index - index) + y) * multipliers.getValue(toMove.value)
-                            add(StateWithCost(State(
-                                config.map { row -> row.toMutableList() }.apply {
-                                    get(y)[room.index] = '.'
-                                    get(0)[index] = toMove.value
-                                }
-                            ), cost))
+                            add(
+                                StateWithCost(
+                                    State(
+                                        config.map { row -> row.toMutableList() }.apply {
+                                            get(y)[room.index] = '.'
+                                            get(0)[index] = toMove.value
+                                        }
+                                    ),
+                                    cost
+                                )
+                            )
                         }
                     }
                 }
