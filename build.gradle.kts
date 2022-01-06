@@ -1,5 +1,9 @@
 import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 
+apply {
+    from("$rootDir/tools/gradle_tests_report.gradle.kts")
+}
+
 plugins {
     kotlin("jvm") version "1.6.10"
     kotlin("plugin.serialization") version "1.5.31"
