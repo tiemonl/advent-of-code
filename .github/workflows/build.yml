@@ -12,13 +12,11 @@ jobs:
         with:
           java-version: 11
 
-      - name: Gradle build
+      - name: Set up Gradle
         uses: gradle/gradle-build-action@v2
         with:
           gradle-version: wrapper
-          arguments: build
+      - name: Build app
+        run: gradle build -x test
       - name: Unit tests
-        uses: gradle/gradle-build-action@v2
-        with:
-          gradle-version: wrapper
-          arguments: test
+        run: gradle test
