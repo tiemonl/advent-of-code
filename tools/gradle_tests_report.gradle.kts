@@ -3,7 +3,6 @@ import org.gradle.api.tasks.testing.logging.TestExceptionFormat
 import org.gradle.api.tasks.testing.logging.TestLogEvent
 import java.util.Date
 
-
 var testResults by extra(mutableListOf<TestOutcome>()) // Container for tests summaries
 
 tasks.withType<Test>().configureEach {
@@ -33,7 +32,7 @@ tasks.withType<Test>().configureEach {
         override fun afterSuite(desc: TestDescriptor, result: TestResult) {
             if (desc.parent != null) return // Only summarize results for whole modules
 
-            val summary = TestOutcome().apply {
+            val summary = TestOutcome(passed = result.failedTestCount == 0L).apply {
                 add(
                     "${testTask.project.name}:${testTask.name} results: ${result.resultType} " +
                         "(" +
@@ -61,6 +60,9 @@ gradle.buildFinished {
     if (testResults.isNotEmpty()) {
         printResults(testResults)
     }
+    if (testResults.any { !it.passed }) {
+        throw GradleException("There were failing tests. See report")
+    }
 }
 
 fun printResults(allResults: List<TestOutcome>) {
@@ -80,7 +82,10 @@ fun printResults(allResults: List<TestOutcome>) {
     println("└${"─".repeat(maxLength)}┘")
 }
 
-data class TestOutcome(val lines: MutableList<String> = mutableListOf()) {
+data class TestOutcome(
+    val lines: MutableList<String> = mutableListOf(),
+    val passed: Boolean
+) {
     fun add(line: String) {
         lines.add(line)
     }
