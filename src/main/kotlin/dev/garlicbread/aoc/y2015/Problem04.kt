@@ -2,7 +2,7 @@ package dev.garlicbread.aoc.y2015
 
 import dev.garlicbread.aoc.Puzzle
 import dev.garlicbread.aoc.solve
-import dev.garlicbread.aoc.utils.md5
+import java.security.MessageDigest
 
 fun main() = solve(
     benchmark = false
@@ -14,22 +14,32 @@ class Problem04 : Puzzle<Int, Int>(
 ) {
     override val input = rawInput.first()
 
+    var part1: Int = 0
+
     override fun solvePartOne(): Int {
-        return findLowestHashThatStartsWithNZeros(input, 5)
+        part1 = mineAdventCoins(
+            input,
+            0
+        ) { it[0].toInt() == 0 && it[1].toInt() == 0 && it[2].toInt() in 0..15 }
+        return part1
     }
 
     override fun solvePartTwo(): Int {
-        return findLowestHashThatStartsWithNZeros(input, 6)
+        return mineAdventCoins(
+            input,
+            part1
+        ) { it[0].toInt() == 0 && it[1].toInt() == 0 && it[2].toInt() == 0 }
     }
 
-    private fun findLowestHashThatStartsWithNZeros(key: String, zeroes: Int): Int {
-        var counter = 0
-        var currentString = key + counter
+    private fun mineAdventCoins(prefix: String, startWith: Int, predicate: (ByteArray) -> Boolean): Int {
+        val digester: MessageDigest = MessageDigest.getInstance("MD5")
 
-        while (!currentString.md5().startsWith("0".repeat(zeroes))) {
-            counter++
-            currentString = key + counter
+        for (n in startWith..Int.MAX_VALUE) {
+            val digest = digester.digest((prefix + n).toByteArray()) ?: ByteArray(0)
+            if (predicate(digest)) {
+                return n
+            }
         }
-        return counter
+        throw error("No AdventCoin found")
     }
 }
