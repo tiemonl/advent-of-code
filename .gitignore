@@ -75,3 +75,5 @@ build/*
 .gradle/*
 
 .secret
+
+.DS_Store
