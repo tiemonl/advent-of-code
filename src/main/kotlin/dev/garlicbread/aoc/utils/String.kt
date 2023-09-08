@@ -9,3 +9,11 @@ fun String.md5(): String {
 }
 
 fun String.allUnique(): Boolean = all(hashSetOf<Char>()::add)
+
+fun String.countMatches(pattern: String) = this.split(pattern)
+    .dropLastWhile { it.isEmpty() }
+    .toTypedArray().size - 1
+
+fun String.countMatches(pattern: Regex) = this.split(pattern)
+    .dropLastWhile { it.isEmpty() }
+    .toTypedArray().size - 1
