@@ -13,7 +13,7 @@ createpuzzlefile() {
     exit 1
   fi
 
-  local puzzledir="src/main/kotlin/dev/garlicbread/aoc/y$year/"
+  local puzzledir="years/$year/src/main/kotlin/dev/garlicbread/aoc/y$year/"
   if [[ ! -e "$puzzledir" ]]; then
     mkdir "$puzzledir"
   fi
@@ -27,16 +27,16 @@ createpuzzlefile() {
   echo "Creating puzzle class: $file"
   echo "package $package.y$year
 
-import ${package}.Puzzle
-import ${package}.solve
+import ${package}.core.Puzzle
+import ${package}.core.solve
 
 fun main() = solve(
-    benchmark = false
+    benchmark = false,
 ) { Problem${paddedDay}() }
 
 class Problem${paddedDay} : Puzzle<${type1}, ${type2}>(
     year = $year,
-    day = $day
+    day = $day,
 ) {
     override val input = rawInput
 

@@ -11,7 +11,7 @@ createtestfile() {
     exit 1
   fi
 
-  local puzzledir="src/test/kotlin/dev/garlicbread/aoc/y$year/"
+  local puzzledir="years/$year/src/test/kotlin/dev/garlicbread/aoc/y$year/"
   if [[ ! -e "$puzzledir" ]]; then
     mkdir "$puzzledir"
   fi
@@ -26,7 +26,7 @@ createtestfile() {
   echo "package dev.garlicbread.aoc.y${year}
 
 import com.google.common.truth.Truth.assertThat
-import dev.garlicbread.aoc.Solver
+import dev.garlicbread.aoc.core.Solver
 import org.junit.jupiter.api.BeforeEach
 import org.junit.jupiter.api.DisplayName
 import org.junit.jupiter.api.Nested
@@ -80,7 +80,7 @@ internal class Problem${paddedDay}Test {
     }
 }" >"${file}"
 
-  local inputfolder=src/test/resources/$year/
+  local inputfolder=years/$year/src/test/resources/
   local inputfile="${inputfolder}input${day}_1.in"
   if [[ -e $inputfile ]]; then
     read -p "File exists: ${inputfile}. Overwrite? (y/N) " -r overwrite
