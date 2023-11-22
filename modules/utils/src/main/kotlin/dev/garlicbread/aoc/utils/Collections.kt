@@ -17,3 +17,5 @@ fun <E> List<E>.permutations(builtSequence: List<E> = listOf()): List<List<E>> =
     } else {
         flatMap { (this - it).permutations(builtSequence + it) }
     }
+
+fun Iterable<Int>.product() = this.reduce { acc, value -> acc * value }

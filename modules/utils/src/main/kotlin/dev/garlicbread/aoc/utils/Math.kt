@@ -31,3 +31,12 @@ fun IntRange.intersect(other: IntRange): IntRange =
 
 fun IntRange.size(): Int =
     last - first + 1
+
+fun Int.combinationSum(digitsToSumUp: Int): List<List<Int>> =
+    if (digitsToSumUp == 1) {
+        listOf(listOf(this))
+    } else {
+        (0..this).flatMap { value ->
+            (this - value).combinationSum(digitsToSumUp - 1).map { listOf(value) + it }
+        }
+    }
