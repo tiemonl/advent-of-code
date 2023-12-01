@@ -11,7 +11,7 @@ usage() {
 getinput() {
   local folder=years/$YEAR/src/main/resources/
   if [[ ! -d $folder ]]; then
-    mkdir "$folder"
+    mkdir -p "$folder"
   fi
   if [[ -f $folder/input$DAY.in ]] && [[ -s $folder/input$DAY.in ]]; then
     echo "Input already exists; skipping..."
