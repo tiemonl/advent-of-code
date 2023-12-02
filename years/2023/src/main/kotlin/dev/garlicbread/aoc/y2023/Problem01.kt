@@ -10,6 +10,7 @@ fun main() = solve(
 class Problem01 : Puzzle<Int, Int>(
     year = 2023,
     day = 1,
+    name = "Trebuchet?!",
 ) {
     override val input = rawInput
 
