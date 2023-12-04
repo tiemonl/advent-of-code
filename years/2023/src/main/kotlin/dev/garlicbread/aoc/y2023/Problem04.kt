@@ -11,6 +11,7 @@ fun main() = solve(
 class Problem04 : Puzzle<Int, Int>(
     year = 2023,
     day = 4,
+    name = "Scratchcards",
 ) {
     override val input = rawInput.mapIndexed { index, game ->
         val scratchCard = game.split(": ").last().split(" | ")
