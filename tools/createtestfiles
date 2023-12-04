@@ -49,14 +49,14 @@ internal class Problem${paddedDay}Test {
         fun \`Matches example 1\`() {
             Solver.suffix = \"_1\"
             val answer = Problem${paddedDay}().solvePartOne()
-            assertThat(answer).isEqualTo(TODO())
+            assertThat(answer).isEqualTo(-1)
         }
 
         @Test
         @DisplayName(\"Actual Input\")
         fun \`Matches actual\`() {
             val answer = Problem${paddedDay}().solvePartOne()
-            assertThat(answer).isEqualTo(TODO())
+            assertThat(answer).isEqualTo(-1)
         }
     }
 
@@ -68,14 +68,14 @@ internal class Problem${paddedDay}Test {
         fun \`Matches example 1\`() {
             Solver.suffix = \"_1\"
             val answer = Problem${paddedDay}().solvePartTwo()
-            assertThat(answer).isEqualTo(TODO())
+            assertThat(answer).isEqualTo(-1)
         }
 
         @Test
         @DisplayName(\"Actual Input\")
         fun \`Matches actual\`() {
             val answer = Problem${paddedDay}().solvePartTwo()
-            assertThat(answer).isEqualTo(TODO())
+            assertThat(answer).isEqualTo(-1)
         }
     }
 }" >"${file}"
