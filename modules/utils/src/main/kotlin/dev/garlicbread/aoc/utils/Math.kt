@@ -5,6 +5,21 @@ fun gcd(a: Int, b: Int, vararg numbers: Int): Int = when {
     else -> gcd(gcd(a, b), numbers.first(), *numbers.drop(1).toIntArray())
 }
 
+fun gcd(a: Long, b: Long, vararg numbers: Long): Long = when {
+    numbers.isEmpty() -> if (b == 0L) a else gcd(b, a % b)
+    else -> gcd(gcd(a, b), numbers.first(), *numbers.drop(1).toLongArray())
+}
+
+fun lcm(a: Long, b: Long): Long = a * (b / gcd(a, b))
+
+fun lcm(numbers: List<Long>): Long {
+    var result = numbers.first()
+    (1 until numbers.size).map {
+        result = lcm(result, numbers[it])
+    }
+    return result.toLong()
+}
+
 fun median(list: List<Int>) = list.sorted().let {
     if (it.size % 2 == 0) {
         (it[it.size / 2] + it[(it.size - 1) / 2]) / 2
