@@ -4,8 +4,8 @@ createpuzzlefile() {
   local year=$1
   local day=$2
   local paddedDay=$(printf "%02d" $day)
-  local type1=${3:-Int}
-  local type2=${4:-Int}
+  local type1=${3:-Any}
+  local type2=${4:-Any}
   local package="dev.garlicbread.aoc"
 
   if [[ -z $year || -z $day ]]; then
@@ -37,6 +37,7 @@ fun main() = solve(
 class Problem${paddedDay} : Puzzle<${type1}, ${type2}>(
     year = $year,
     day = $day,
+    name = \"\",
 ) {
     override val input = rawInput
 

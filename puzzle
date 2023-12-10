@@ -37,8 +37,8 @@ fi
 
 YEAR=$1
 DAY=$2
-TYPE1=${3:-Int}
-TYPE2=${4:-Int}
+TYPE1=${3:-Any}
+TYPE2=${4:-Any}
 
 [[ $YEAR =~ ^[0-9]{4}$ ]] || invalidparam "Invalid year."
 [[ $DAY =~ ^[1-9][0-9]?$ ]] || invalidparam "Invalid day."
