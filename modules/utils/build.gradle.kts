@@ -11,4 +11,5 @@ dependencies {
     simpleTesting()
 
     api(project(Modules.core))
+    implementation(project(Modules.models))
 }

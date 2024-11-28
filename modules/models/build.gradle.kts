@@ -5,5 +5,4 @@ plugins {
 
 dependencies {
     api(project(Modules.core))
-    implementation(project(Modules.utils))
 }

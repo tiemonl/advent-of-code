@@ -3,6 +3,8 @@ package dev.garlicbread.aoc.y2021
 import dev.garlicbread.aoc.core.Puzzle
 import dev.garlicbread.aoc.core.solve
 import dev.garlicbread.aoc.models.Point
+import dev.garlicbread.aoc.utils.pointsInBetween
+import dev.garlicbread.aoc.utils.slope
 
 fun main() = solve(
     benchmark = false,

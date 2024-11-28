@@ -43,7 +43,7 @@ internal class Problem${paddedDay}Test {
 
     @Nested
     @DisplayName(\"Part 1\")
-    inner class Part1 {
+    inner class PartOne {
         @Test
         @DisplayName(\"Example Input 1\")
         fun \`Matches example 1\`() {
@@ -62,7 +62,7 @@ internal class Problem${paddedDay}Test {
 
     @Nested
     @DisplayName(\"Part 2\")
-    inner class Part2 {
+    inner class PartTwo {
         @Test
         @DisplayName(\"Example Input 1\")
         fun \`Matches example 1\`() {
