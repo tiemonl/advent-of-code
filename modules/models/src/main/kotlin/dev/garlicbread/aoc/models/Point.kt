@@ -1,8 +1,5 @@
 package dev.garlicbread.aoc.models
 
-import dev.garlicbread.aoc.utils.gcd
-import kotlin.math.absoluteValue
-
 data class Point(
     val x: Int,
     val y: Int,
@@ -29,22 +26,4 @@ data class Point(
 
     fun neighbors(diagonal: Boolean = false) = listOf(up(), right(), down(), left()) +
         if (diagonal) listOf(up().right(), right().down(), down().left(), left().up()) else emptyList()
-
-    fun slope(to: Point): Point {
-        val dX = to.x - x
-        val dY = to.y - y
-        val gcd = gcd(dX.absoluteValue, dY.absoluteValue)
-        return Point(dX / gcd, dY / gcd)
-    }
-
-    fun pointsInBetween(to: Point): List<Point> {
-        val slope = this.slope(to)
-        val points = mutableListOf(this)
-        var curr = this
-        while (!points.contains(to)) {
-            curr += slope
-            points.add(curr)
-        }
-        return points
-    }
 }

@@ -1,5 +1,7 @@
 package dev.garlicbread.aoc.utils
 
+import dev.garlicbread.aoc.models.Point
+
 fun <T> Collection<T>.pairs(): List<Pair<T, T>> =
     this.flatMapIndexed { index, a ->
         this.drop(index).map { b -> a to b }
@@ -19,3 +21,10 @@ fun <E> List<E>.permutations(builtSequence: List<E> = listOf()): List<List<E>> =
     }
 
 fun Iterable<Int>.product() = this.reduce { acc, value -> acc * value }
+
+fun <T> List<List<T>>.isSafe(point: Point) = point.y in this.indices && point.x in this[point.y].indices
+
+fun <T> List<List<T>>.elementAt(point: Point): T = this[point.y][point.x]
+
+fun Array<CharArray>.isSafe(at: Point) =
+    at.y in this.indices && at.x in this[at.y].indices
