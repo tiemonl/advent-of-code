@@ -1,6 +1,9 @@
 package dev.garlicbread.aoc.y2015
 
+import dev.garlicbread.aoc.core.FileInputProvider
+import dev.garlicbread.aoc.core.InputProvider
 import dev.garlicbread.aoc.core.Puzzle
+import dev.garlicbread.aoc.core.PuzzleMetadata
 import dev.garlicbread.aoc.core.solve
 import dev.garlicbread.aoc.utils.permutations
 
@@ -8,11 +11,12 @@ fun main() = solve(
     benchmark = false,
 ) { Problem13() }
 
-class Problem13 : Puzzle<Int, Int>(
-    year = 2015,
-    day = 13,
+class Problem13(
+    inputProvider: InputProvider = FileInputProvider(METADATA)
+) : Puzzle<Int, Int>(
+    metadata = METADATA
 ) {
-    override val input = rawInput.map { dinnerTable ->
+    override val input = inputProvider.provideStringListInput().map { dinnerTable ->
         "\\b([A-Z].*?)\\b.*(gain|lose)\\b.*\\b([0-9]+).*?\\b([A-Z].*?)\\b.*".toRegex()
             .matchEntire(dinnerTable)!!.destructured.let { (person, gainLose, happiness, neighbor) ->
                 DinnerTable(
@@ -36,5 +40,9 @@ class Problem13 : Puzzle<Int, Int>(
             input.first { it.person == person1 && it.neighbor == person2 }.happiness +
                     input.first { it.person == person2 && it.neighbor == person1 }.happiness
         }
+    }
+
+    companion object {
+        val METADATA = PuzzleMetadata(year = 2015, day = 13, name = "Knights of the Dinner Table")
     }
 }

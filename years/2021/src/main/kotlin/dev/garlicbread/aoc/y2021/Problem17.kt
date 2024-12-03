@@ -1,6 +1,9 @@
 package dev.garlicbread.aoc.y2021
 
+import dev.garlicbread.aoc.core.FileInputProvider
+import dev.garlicbread.aoc.core.InputProvider
 import dev.garlicbread.aoc.core.Puzzle
+import dev.garlicbread.aoc.core.PuzzleMetadata
 import dev.garlicbread.aoc.core.solve
 import dev.garlicbread.aoc.models.Point
 import dev.garlicbread.aoc.utils.gauss
@@ -9,17 +12,19 @@ fun main() = solve(
     benchmark = false,
 ) { Problem17() }
 
-class Problem17 : Puzzle<Int, Int>(
-    year = 2021,
-    day = 17,
+class Problem17(
+    inputProvider: InputProvider = FileInputProvider(METADATA)
+) : Puzzle<Int, Int>(
+    metadata = METADATA
 ) {
-    override val input = Regex("""target area: x=(\d+)\.\.(\d+), y=(-\d+)\.\.(-\d+)""").matchEntire(rawInput.first())!!
-        .destructured.let { (minX, maxX, minY, maxY) ->
-            Pair(
-                Point(minX.toInt(), minY.toInt()),
-                Point(maxX.toInt(), maxY.toInt()),
-            )
-        }
+    override val input =
+        Regex("""target area: x=(\d+)\.\.(\d+), y=(-\d+)\.\.(-\d+)""").matchEntire(inputProvider.provideStringInput())!!
+            .destructured.let { (minX, maxX, minY, maxY) ->
+                Pair(
+                    Point(minX.toInt(), minY.toInt()),
+                    Point(maxX.toInt(), maxY.toInt()),
+                )
+            }
 
     override fun solvePartOne(): Int {
         return gauss((-input.first.y - 1))
@@ -63,4 +68,8 @@ class Problem17 : Puzzle<Int, Int>(
 
     private fun Pair<Point, Point>.contains(point: Point) =
         point.x in IntRange(this.first.x, this.second.x) && point.y in IntRange(this.first.y, this.second.y)
+
+    companion object {
+        val METADATA = PuzzleMetadata(year = 2021, day = 17, name = "")
+    }
 }

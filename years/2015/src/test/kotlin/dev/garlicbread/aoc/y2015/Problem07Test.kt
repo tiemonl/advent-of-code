@@ -1,8 +1,8 @@
 package dev.garlicbread.aoc.y2015
 
 import com.google.common.truth.Truth.assertThat
-import dev.garlicbread.aoc.core.Solver
-import org.junit.jupiter.api.BeforeEach
+import dev.garlicbread.aoc.core.FileInputProvider
+import dev.garlicbread.aoc.core.PuzzleMetadata
 import org.junit.jupiter.api.DisplayName
 import org.junit.jupiter.api.Nested
 import org.junit.jupiter.api.Test
@@ -10,11 +10,7 @@ import org.junit.jupiter.api.Test
 @DisplayName("2015 Day 7")
 internal class Problem07Test {
 
-    @BeforeEach
-    fun setUp() {
-        Solver.suffix = ""
-        Solver.inputProvider = Solver.defaultInputProvider
-    }
+    val metadata = PuzzleMetadata(year = 2015, day = 7)
 
     @Nested
     @DisplayName("Part 1")
@@ -22,71 +18,64 @@ internal class Problem07Test {
         @Test
         @DisplayName("Example Input 1")
         fun `Matches wire d`() {
-            Solver.suffix = "_1"
-            val answer = Problem07(wireSolution = "d").solvePartOne()
+            val answer = Problem07(wireSolution = "d", FileInputProvider(metadata, "_1")).solvePartOne()
             assertThat(answer).isEqualTo(72)
         }
 
         @Test
         @DisplayName("Example Input 2")
         fun `Matches wire e`() {
-            Solver.suffix = "_1"
-            val answer = Problem07(wireSolution = "e").solvePartOne()
+            val answer = Problem07(wireSolution = "e", FileInputProvider(metadata, "_1")).solvePartOne()
             assertThat(answer).isEqualTo(507)
         }
 
         @Test
         @DisplayName("Example Input 3")
         fun `Matches wire f`() {
-            Solver.suffix = "_1"
-            val answer = Problem07(wireSolution = "f").solvePartOne()
+            val answer = Problem07(wireSolution = "f", FileInputProvider(metadata, "_1")).solvePartOne()
             assertThat(answer).isEqualTo(492)
         }
 
         @Test
         @DisplayName("Example Input 4")
         fun `Matches wire g`() {
-            Solver.suffix = "_1"
-            val answer = Problem07(wireSolution = "g").solvePartOne()
+            val answer = Problem07(wireSolution = "g", FileInputProvider(metadata, "_1")).solvePartOne()
             assertThat(answer).isEqualTo(114)
         }
 
         @Test
         @DisplayName("Example Input 5")
         fun `Matches wire h`() {
-            Solver.suffix = "_1"
-            val answer = Problem07(wireSolution = "h").solvePartOne()
+            val answer = Problem07(wireSolution = "h", FileInputProvider(metadata, "_1")).solvePartOne()
             assertThat(answer).isEqualTo(65412)
         }
 
         @Test
         @DisplayName("Example Input 6")
         fun `Matches wire i`() {
-            Solver.suffix = "_1"
-            val answer = Problem07(wireSolution = "i").solvePartOne()
+            val answer = Problem07(wireSolution = "i", FileInputProvider(metadata, "_1")).solvePartOne()
             assertThat(answer).isEqualTo(65079)
         }
 
         @Test
         @DisplayName("Example Input 7")
         fun `Matches wire x`() {
-            Solver.suffix = "_1"
-            val answer = Problem07(wireSolution = "x").solvePartOne()
+            val answer = Problem07(wireSolution = "x", FileInputProvider(metadata, "_1")).solvePartOne()
             assertThat(answer).isEqualTo(123)
         }
 
         @Test
         @DisplayName("Example Input 8")
         fun `Matches wire y`() {
-            Solver.suffix = "_1"
-            val answer = Problem07(wireSolution = "y").solvePartOne()
+            val answer = Problem07(wireSolution = "y", FileInputProvider(metadata, "_1")).solvePartOne()
             assertThat(answer).isEqualTo(456)
         }
 
         @Test
         @DisplayName("Actual Input")
         fun `Matches actual`() {
-            val answer = Problem07().solvePartOne()
+            val puzzle = Problem07(inputProvider = FileInputProvider(metadata))
+            val answer = puzzle.solvePartOne()
             assertThat(answer).isEqualTo(956)
         }
     }
@@ -97,71 +86,64 @@ internal class Problem07Test {
         @Test
         @DisplayName("Example Input 1")
         fun `Matches wire d`() {
-            Solver.suffix = "_1"
-            val answer = Problem07(wireSolution = "d").solvePartOne()
+            val answer = Problem07(wireSolution = "d", FileInputProvider(metadata, "_1")).solvePartTwo()
             assertThat(answer).isEqualTo(72)
         }
 
         @Test
         @DisplayName("Example Input 2")
         fun `Matches wire e`() {
-            Solver.suffix = "_1"
-            val answer = Problem07(wireSolution = "e").solvePartOne()
+            val answer = Problem07(wireSolution = "e", FileInputProvider(metadata, "_1")).solvePartTwo()
             assertThat(answer).isEqualTo(507)
         }
 
         @Test
         @DisplayName("Example Input 3")
         fun `Matches wire f`() {
-            Solver.suffix = "_1"
-            val answer = Problem07(wireSolution = "f").solvePartOne()
+            val answer = Problem07(wireSolution = "f", FileInputProvider(metadata, "_1")).solvePartTwo()
             assertThat(answer).isEqualTo(492)
         }
 
         @Test
         @DisplayName("Example Input 4")
         fun `Matches wire g`() {
-            Solver.suffix = "_1"
-            val answer = Problem07(wireSolution = "g").solvePartOne()
+            val answer = Problem07(wireSolution = "g", FileInputProvider(metadata, "_1")).solvePartTwo()
             assertThat(answer).isEqualTo(114)
         }
 
         @Test
         @DisplayName("Example Input 5")
         fun `Matches wire h`() {
-            Solver.suffix = "_1"
-            val answer = Problem07(wireSolution = "h").solvePartOne()
+            val answer = Problem07(wireSolution = "h", FileInputProvider(metadata, "_1")).solvePartTwo()
             assertThat(answer).isEqualTo(65412)
         }
 
         @Test
         @DisplayName("Example Input 6")
         fun `Matches wire i`() {
-            Solver.suffix = "_1"
-            val answer = Problem07(wireSolution = "i").solvePartOne()
+            val answer = Problem07(wireSolution = "i", FileInputProvider(metadata, "_1")).solvePartTwo()
             assertThat(answer).isEqualTo(65079)
         }
 
         @Test
         @DisplayName("Example Input 7")
         fun `Matches wire x`() {
-            Solver.suffix = "_1"
-            val answer = Problem07(wireSolution = "x").solvePartOne()
+            val answer = Problem07(wireSolution = "x", FileInputProvider(metadata, "_1")).solvePartTwo()
             assertThat(answer).isEqualTo(123)
         }
 
         @Test
         @DisplayName("Example Input 8")
         fun `Matches wire y`() {
-            Solver.suffix = "_1"
-            val answer = Problem07(wireSolution = "y").solvePartOne()
+            val answer = Problem07(wireSolution = "y", FileInputProvider(metadata, "_1")).solvePartTwo()
             assertThat(answer).isEqualTo(456)
         }
 
         @Test
         @DisplayName("Actual Input")
         fun `Matches actual`() {
-            val answer = Problem07().solvePartTwo()
+            val puzzle = Problem07(inputProvider = FileInputProvider(metadata))
+            val answer = puzzle.solvePartTwo()
             assertThat(answer).isEqualTo(40149)
         }
     }

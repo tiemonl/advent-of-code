@@ -9,7 +9,7 @@ usage() {
 }
 
 getinput() {
-  local folder=years/$YEAR/src/main/resources/
+  local folder=input/$YEAR/main/
   if [[ ! -d $folder ]]; then
     mkdir -p "$folder"
   fi

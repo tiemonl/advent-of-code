@@ -24,22 +24,31 @@ createpuzzlefile() {
     [[ "$overwrite" =~ ^[yY]$ ]] || return 0
   fi
 
+  local name=$(curl -s https://adventofcode.com/$year/day/$day | awk '/--- Day [0-9]+: .* ---/ {
+                         sub(/.*--- Day [0-9]+: /, "");
+                         sub(/ ---.*/, "");
+                         print $0
+                     }')
+
   echo "Creating puzzle class: $file"
   echo "package $package.y$year
 
+import ${package}.core.FileInputProvider
+import ${package}.core.InputProvider
 import ${package}.core.Puzzle
+import ${package}.core.PuzzleMetadata
 import ${package}.core.solve
 
 fun main() = solve(
     benchmark = false,
 ) { Problem${paddedDay}() }
 
-class Problem${paddedDay} : Puzzle<${type1}, ${type2}>(
-    year = $year,
-    day = $day,
-    name = \"\",
+class Problem${paddedDay}(
+    inputProvider: InputProvider = FileInputProvider(METADATA)
+ ): Puzzle<${type1}, ${type2}>(
+    metadata = METADATA,
 ) {
-    override val input = rawInput
+    override val input = inputProvider.provideStringListInput()
 
     override fun solvePartOne(): ${type1} {
         return 0
@@ -47,6 +56,10 @@ class Problem${paddedDay} : Puzzle<${type1}, ${type2}>(
 
     override fun solvePartTwo(): ${type2} {
         return 0
+    }
+
+    companion object {
+        val METADATA = PuzzleMetadata(year = $year, day = $day, name = \"$name\")
     }
 }" >"${file}"
 

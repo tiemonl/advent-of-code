@@ -1,6 +1,9 @@
 package dev.garlicbread.aoc.y2023
 
+import dev.garlicbread.aoc.core.FileInputProvider
+import dev.garlicbread.aoc.core.InputProvider
 import dev.garlicbread.aoc.core.Puzzle
+import dev.garlicbread.aoc.core.PuzzleMetadata
 import dev.garlicbread.aoc.core.solve
 import dev.garlicbread.aoc.utils.lcm
 
@@ -8,25 +11,26 @@ fun main() = solve(
     benchmark = false,
 ) { Problem08() }
 
-class Problem08 : Puzzle<Int, Long>(
-    year = 2023,
-    day = 8,
-    name = "Haunted Wasteland",
+class Problem08(
+    inputProvider: InputProvider = FileInputProvider(METADATA)
+) : Puzzle<Int, Long>(
+    metadata = METADATA
 ) {
-    override val input = rawInput.joinToString("\n").split("\n\n").let { (instruction, mapList) ->
-        val map = mutableMapOf<String, Pair<String, String>>()
-        mapList.split("\n").forEach {
-            it.split(" = ").let { (key, direction) ->
-                direction.removeSurrounding("(", ")").split(", ").let { (left, right) ->
-                    map[key] = Pair(left, right)
+    override val input =
+        inputProvider.provideStringListInput().joinToString("\n").split("\n\n").let { (instruction, mapList) ->
+            val map = mutableMapOf<String, Pair<String, String>>()
+            mapList.split("\n").forEach {
+                it.split(" = ").let { (key, direction) ->
+                    direction.removeSurrounding("(", ")").split(", ").let { (left, right) ->
+                        map[key] = Pair(left, right)
+                    }
                 }
             }
+            Wasteland(
+                instruction = instruction.toList(),
+                map = map.toMap(),
+            )
         }
-        Wasteland(
-            instruction = instruction.toList(),
-            map = map.toMap(),
-        )
-    }
 
     override fun solvePartOne() = "AAA".findEndPoint()
 
@@ -50,4 +54,8 @@ class Problem08 : Puzzle<Int, Long>(
         val instruction: List<Char>,
         val map: Map<String, Pair<String, String>>,
     )
+
+    companion object {
+        val METADATA = PuzzleMetadata(year = 2023, day = 8, name = "Haunted Wasteland")
+    }
 }

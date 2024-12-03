@@ -1,17 +1,21 @@
 package dev.garlicbread.aoc.y2021
 
+import dev.garlicbread.aoc.core.FileInputProvider
+import dev.garlicbread.aoc.core.InputProvider
 import dev.garlicbread.aoc.core.Puzzle
+import dev.garlicbread.aoc.core.PuzzleMetadata
 import dev.garlicbread.aoc.core.solve
 
 fun main() = solve(
     benchmark = false,
 ) { Problem16() }
 
-class Problem16 : Puzzle<Int, Long>(
-    year = 2021,
-    day = 16,
+class Problem16(
+    inputProvider: InputProvider = FileInputProvider(METADATA)
+) : Puzzle<Int, Long>(
+    metadata = METADATA
 ) {
-    override val input = rawInput.first().hexToBinary()
+    override val input = inputProvider.provideStringInput().hexToBinary()
 
     override fun solvePartOne(): Int {
         return parse(input).sumOfVersions()
@@ -86,4 +90,8 @@ class Problem16 : Puzzle<Int, Long>(
     }
 
     private fun String.hexToBinary() = this.map { it.digitToInt(16).toString(2).padStart(4, '0') }.joinToString("")
+
+    companion object {
+        val METADATA = PuzzleMetadata(year = 2021, day = 16, name = "")
+    }
 }

@@ -1,18 +1,21 @@
 package dev.garlicbread.aoc.y2023
 
+import dev.garlicbread.aoc.core.FileInputProvider
+import dev.garlicbread.aoc.core.InputProvider
 import dev.garlicbread.aoc.core.Puzzle
+import dev.garlicbread.aoc.core.PuzzleMetadata
 import dev.garlicbread.aoc.core.solve
 
 fun main() = solve(
     benchmark = false,
 ) { Problem01() }
 
-class Problem01 : Puzzle<Int, Int>(
-    year = 2023,
-    day = 1,
-    name = "Trebuchet?!",
+class Problem01(
+    inputProvider: InputProvider = FileInputProvider(METADATA)
+) : Puzzle<Int, Int>(
+    metadata = METADATA
 ) {
-    override val input = rawInput
+    override val input = inputProvider.provideStringListInput()
 
     private val validDigits = mapOf(
         "one" to 1,
@@ -42,5 +45,9 @@ class Problem01 : Puzzle<Int, Int>(
         val first = currentValue.first { it.isDigit() }.digitToInt()
         val last = currentValue.last { it.isDigit() }.digitToInt()
         return first * 10 + last
+    }
+
+    companion object {
+        val METADATA = PuzzleMetadata(year = 2023, day = 1, name = "Trebuchet?!")
     }
 }

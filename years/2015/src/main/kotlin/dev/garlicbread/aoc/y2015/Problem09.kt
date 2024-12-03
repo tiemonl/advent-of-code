@@ -1,6 +1,9 @@
 package dev.garlicbread.aoc.y2015
 
+import dev.garlicbread.aoc.core.FileInputProvider
+import dev.garlicbread.aoc.core.InputProvider
 import dev.garlicbread.aoc.core.Puzzle
+import dev.garlicbread.aoc.core.PuzzleMetadata
 import dev.garlicbread.aoc.core.solve
 import dev.garlicbread.aoc.utils.permutations
 
@@ -8,11 +11,12 @@ fun main() = solve(
     benchmark = false,
 ) { Problem09() }
 
-class Problem09 : Puzzle<Int, Int>(
-    year = 2015,
-    day = 9,
+class Problem09(
+    inputProvider: InputProvider = FileInputProvider(METADATA)
+) : Puzzle<Int, Int>(
+    metadata = METADATA
 ) {
-    override val input = rawInput.flatMap {
+    override val input = inputProvider.provideStringListInput().flatMap {
         it.split(" to ", " = ").let { (from, to, distance) ->
             listOf(
                 Location(from, to, distance.toInt()),
@@ -42,4 +46,8 @@ class Problem09 : Puzzle<Int, Int>(
         val to: String,
         val distance: Int,
     )
+
+    companion object {
+        val METADATA = PuzzleMetadata(year = 2015, day = 9, name = "All in a Single Night")
+    }
 }

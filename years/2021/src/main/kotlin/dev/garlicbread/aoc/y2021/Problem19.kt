@@ -1,6 +1,9 @@
 package dev.garlicbread.aoc.y2021
 
+import dev.garlicbread.aoc.core.FileInputProvider
+import dev.garlicbread.aoc.core.InputProvider
 import dev.garlicbread.aoc.core.Puzzle
+import dev.garlicbread.aoc.core.PuzzleMetadata
 import dev.garlicbread.aoc.core.solve
 import dev.garlicbread.aoc.models.Point3d
 import dev.garlicbread.aoc.utils.pairs
@@ -9,11 +12,12 @@ fun main() = solve(
     benchmark = false,
 ) { Problem19() }
 
-class Problem19 : Puzzle<Int, Int>(
-    year = 2021,
-    day = 19,
+class Problem19(
+    inputProvider: InputProvider = FileInputProvider(METADATA)
+) : Puzzle<Int, Int>(
+    metadata = METADATA
 ) {
-    override val input = parseInput(rawInput.joinToString("\n"))
+    override val input = parseInput(inputProvider.provideStringListInput().joinToString("\n"))
     private val scannerSectors = findScannersSectorsPairs(input)
 
     override fun solvePartOne(): Int {
@@ -72,4 +76,8 @@ class Problem19 : Puzzle<Int, Int>(
         val scanner: Point3d,
         val beacons: Set<Point3d>,
     )
+
+    companion object {
+        val METADATA = PuzzleMetadata(year = 2021, day = 19, name = "")
+    }
 }

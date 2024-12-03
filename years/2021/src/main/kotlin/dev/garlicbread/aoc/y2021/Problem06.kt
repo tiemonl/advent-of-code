@@ -1,17 +1,21 @@
 package dev.garlicbread.aoc.y2021
 
+import dev.garlicbread.aoc.core.FileInputProvider
+import dev.garlicbread.aoc.core.InputProvider
 import dev.garlicbread.aoc.core.Puzzle
+import dev.garlicbread.aoc.core.PuzzleMetadata
 import dev.garlicbread.aoc.core.solve
 
 fun main() = solve(
     benchmark = false,
 ) { Problem06() }
 
-class Problem06 : Puzzle<Long, Long>(
-    year = 2021,
-    day = 6,
+class Problem06(
+    inputProvider: InputProvider = FileInputProvider(METADATA)
+) : Puzzle<Long, Long>(
+    metadata = METADATA
 ) {
-    override val input = rawInput.flatMap { it.split(",").map { value -> value.toInt() } }
+    override val input = inputProvider.provideStringListInput().flatMap { it.split(",").map { value -> value.toInt() } }
 
     override fun solvePartOne(): Long {
         return findFishCountAfterDays(80)
@@ -36,5 +40,9 @@ class Problem06 : Puzzle<Long, Long>(
             fishes = tempFishes
         }
         return fishes.entries.sumOf { it.value }
+    }
+
+    companion object {
+        val METADATA = PuzzleMetadata(year = 2021, day = 6, name = "")
     }
 }

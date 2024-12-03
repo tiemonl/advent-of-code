@@ -1,8 +1,8 @@
 package dev.garlicbread.aoc.y2015
 
 import com.google.common.truth.Truth.assertThat
-import dev.garlicbread.aoc.core.Solver
-import org.junit.jupiter.api.BeforeEach
+import dev.garlicbread.aoc.core.FileInputProvider
+import dev.garlicbread.aoc.core.PuzzleMetadata
 import org.junit.jupiter.api.DisplayName
 import org.junit.jupiter.api.Nested
 import org.junit.jupiter.api.Test
@@ -10,11 +10,7 @@ import org.junit.jupiter.api.Test
 @DisplayName("2015 Day 11")
 internal class Problem11Test {
 
-    @BeforeEach
-    fun setUp() {
-        Solver.suffix = ""
-        Solver.inputProvider = Solver.defaultInputProvider
-    }
+    val metadata = PuzzleMetadata(year = 2015, day = 11)
 
     @Nested
     @DisplayName("Part 1")
@@ -22,23 +18,24 @@ internal class Problem11Test {
         @Test
         @DisplayName("Example Input 1")
         fun `Matches example 1`() {
-            Solver.suffix = "_1"
-            val answer = Problem11().solvePartOne()
+            val puzzle = Problem11(FileInputProvider(metadata, "_1"))
+            val answer = puzzle.solvePartOne()
             assertThat(answer).isEqualTo("abcdffaa")
         }
 
         @Test
         @DisplayName("Example Input 2")
         fun `Matches example 2`() {
-            Solver.suffix = "_2"
-            val answer = Problem11().solvePartOne()
+            val puzzle = Problem11(FileInputProvider(metadata, "_2"))
+            val answer = puzzle.solvePartOne()
             assertThat(answer).isEqualTo("ghjaabcc")
         }
 
         @Test
         @DisplayName("Actual Input")
         fun `Matches actual`() {
-            val answer = Problem11().solvePartOne()
+            val puzzle = Problem11(FileInputProvider(metadata))
+            val answer = puzzle.solvePartOne()
             assertThat(answer).isEqualTo("cqjxxyzz")
         }
     }
@@ -50,7 +47,8 @@ internal class Problem11Test {
         @Test
         @DisplayName("Actual Input")
         fun `Matches actual`() {
-            val answer = Problem11().solvePartTwo()
+            val puzzle = Problem11(FileInputProvider(metadata))
+            val answer = puzzle.solvePartTwo()
             assertThat(answer).isEqualTo("cqkaabcc")
         }
     }

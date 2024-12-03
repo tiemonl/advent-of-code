@@ -1,17 +1,22 @@
 package dev.garlicbread.aoc.y2021
 
+import dev.garlicbread.aoc.core.FileInputProvider
+import dev.garlicbread.aoc.core.InputProvider
 import dev.garlicbread.aoc.core.Puzzle
+import dev.garlicbread.aoc.core.PuzzleMetadata
 import dev.garlicbread.aoc.core.solve
 
 fun main() = solve(
     benchmark = false,
 ) { Problem12() }
 
-class Problem12 : Puzzle<Int, Int>(
-    year = 2021,
-    day = 12,
+class Problem12(
+    inputProvider: InputProvider = FileInputProvider(METADATA)
+) : Puzzle<Int, Int>(
+    metadata = METADATA
 ) {
-    override val input = rawInput.map { it.split("-") }.map { Pair(it.first(), it.last()) }
+    override val input =
+        inputProvider.provideStringListInput().map { it.split("-") }.map { Pair(it.first(), it.last()) }
 
     override fun solvePartOne(): Int {
         return findPassages()
@@ -52,8 +57,8 @@ class Problem12 : Puzzle<Int, Int>(
                 paths.addAll(findPath(step, path, isPart2))
             } else if (step.isUpper()) {
                 paths.addAll(findPath(step, path, isPart2))
-            } else if (isPart2 && !step.isUpper() &&
-                path.filter { !it.isUpper() }.groupingBy { it }.eachCount().filterValues { it >= 2 }.isEmpty()
+            } else if (isPart2 && !step.isUpper() && path.filter { !it.isUpper() }.groupingBy { it }.eachCount()
+                    .filterValues { it >= 2 }.isEmpty()
             ) {
                 paths.addAll(findPath(step, path, isPart2))
             }
@@ -62,4 +67,8 @@ class Problem12 : Puzzle<Int, Int>(
     }
 
     private fun String.isUpper() = this.uppercase() == this
+
+    companion object {
+        val METADATA = PuzzleMetadata(year = 2021, day = 12, name = "")
+    }
 }

@@ -1,8 +1,8 @@
 package dev.garlicbread.aoc.y2021
 
 import com.google.common.truth.Truth.assertThat
-import dev.garlicbread.aoc.core.Solver
-import org.junit.jupiter.api.BeforeEach
+import dev.garlicbread.aoc.core.FileInputProvider
+import dev.garlicbread.aoc.core.PuzzleMetadata
 import org.junit.jupiter.api.DisplayName
 import org.junit.jupiter.api.Nested
 import org.junit.jupiter.api.Test
@@ -10,11 +10,7 @@ import org.junit.jupiter.api.Test
 @DisplayName("2021 Day 12")
 internal class Problem12Test {
 
-    @BeforeEach
-    fun setUp() {
-        Solver.suffix = ""
-        Solver.inputProvider = Solver.defaultInputProvider
-    }
+    val metadata = PuzzleMetadata(year = 2021, day = 12)
 
     @Nested
     @DisplayName("Part 1")
@@ -22,31 +18,32 @@ internal class Problem12Test {
         @Test
         @DisplayName("Example Input 1")
         fun `Matches example 1`() {
-            Solver.suffix = "_1"
-            val answer = Problem12().solvePartOne()
+            val puzzle = Problem12(FileInputProvider(metadata, "_1"))
+            val answer = puzzle.solvePartOne()
             assertThat(answer).isEqualTo(10)
         }
 
         @Test
         @DisplayName("Example Input 2")
         fun `Matches example 2`() {
-            Solver.suffix = "_2"
-            val answer = Problem12().solvePartOne()
+            val puzzle = Problem12(FileInputProvider(metadata, "_2"))
+            val answer = puzzle.solvePartOne()
             assertThat(answer).isEqualTo(19)
         }
 
         @Test
         @DisplayName("Example Input 3")
         fun `Matches example 3`() {
-            Solver.suffix = "_3"
-            val answer = Problem12().solvePartOne()
+            val puzzle = Problem12(FileInputProvider(metadata, "_3"))
+            val answer = puzzle.solvePartOne()
             assertThat(answer).isEqualTo(226)
         }
 
         @Test
         @DisplayName("Actual Input")
         fun `Matches actual`() {
-            val answer = Problem12().solvePartOne()
+            val puzzle = Problem12(FileInputProvider(metadata))
+            val answer = puzzle.solvePartOne()
             assertThat(answer).isEqualTo(3856)
         }
     }
@@ -57,31 +54,32 @@ internal class Problem12Test {
         @Test
         @DisplayName("Example Input 1")
         fun `Matches example 1`() {
-            Solver.suffix = "_1"
-            val answer = Problem12().solvePartTwo()
+            val puzzle = Problem12(FileInputProvider(metadata, "_1"))
+            val answer = puzzle.solvePartTwo()
             assertThat(answer).isEqualTo(36)
         }
 
         @Test
         @DisplayName("Example Input 2")
         fun `Matches example 2`() {
-            Solver.suffix = "_2"
-            val answer = Problem12().solvePartTwo()
+            val puzzle = Problem12(FileInputProvider(metadata, "_2"))
+            val answer = puzzle.solvePartTwo()
             assertThat(answer).isEqualTo(103)
         }
 
         @Test
         @DisplayName("Example Input 3")
         fun `Matches example 3`() {
-            Solver.suffix = "_3"
-            val answer = Problem12().solvePartTwo()
+            val puzzle = Problem12(FileInputProvider(metadata, "_3"))
+            val answer = puzzle.solvePartTwo()
             assertThat(answer).isEqualTo(3509)
         }
 
         @Test
         @DisplayName("Actual Input")
         fun `Matches actual`() {
-            val answer = Problem12().solvePartTwo()
+            val puzzle = Problem12(FileInputProvider(metadata))
+            val answer = puzzle.solvePartTwo()
             assertThat(answer).isEqualTo(116692)
         }
     }

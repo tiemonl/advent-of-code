@@ -1,17 +1,21 @@
 package dev.garlicbread.aoc.y2015
 
+import dev.garlicbread.aoc.core.FileInputProvider
+import dev.garlicbread.aoc.core.InputProvider
 import dev.garlicbread.aoc.core.Puzzle
+import dev.garlicbread.aoc.core.PuzzleMetadata
 import dev.garlicbread.aoc.core.solve
 
 fun main() = solve(
     benchmark = false,
 ) { Problem02() }
 
-class Problem02 : Puzzle<Int, Int>(
-    year = 2015,
-    day = 2,
+class Problem02(
+    inputProvider: InputProvider = FileInputProvider(METADATA)
+) : Puzzle<Int, Int>(
+    metadata = METADATA
 ) {
-    override val input = rawInput.map { Present.parse(it) }
+    override val input = inputProvider.provideStringListInput().map { Present.parse(it) }
 
     override fun solvePartOne(): Int {
         return input.sumOf { it.surfaceArea() + it.wrappingSlack() }
@@ -34,5 +38,9 @@ class Problem02 : Puzzle<Int, Int>(
                 }
             }
         }
+    }
+
+    companion object {
+        val METADATA = PuzzleMetadata(year = 2015, day = 2, name = "I Was Told There Would Be No Math")
     }
 }

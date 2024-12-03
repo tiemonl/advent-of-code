@@ -1,6 +1,9 @@
 package dev.garlicbread.aoc.y2023
 
+import dev.garlicbread.aoc.core.FileInputProvider
+import dev.garlicbread.aoc.core.InputProvider
 import dev.garlicbread.aoc.core.Puzzle
+import dev.garlicbread.aoc.core.PuzzleMetadata
 import dev.garlicbread.aoc.core.solve
 import dev.garlicbread.aoc.utils.product
 import kotlin.math.ceil
@@ -12,18 +15,17 @@ fun main() = solve(
     benchmark = false,
 ) { Problem06() }
 
-class Problem06 : Puzzle<Any, Any>(
-    year = 2023,
-    day = 6,
-    name = "Wait For It"
+class Problem06(
+    inputProvider: InputProvider = FileInputProvider(METADATA)
+) : Puzzle<Any, Any>(
+    metadata = METADATA
 ) {
-    override val input = rawInput.let { (timeList, distanceList) ->
+    override val input = inputProvider.provideStringListInput().let { (timeList, distanceList) ->
         val timeUnits = "\\d+".toRegex().findAll(timeList).map { it.value.toLong() }.toList()
         val distanceUnits = "\\d+".toRegex().findAll(distanceList).map { it.value.toLong() }.toList()
         timeUnits.mapIndexed { index, time ->
             BoatRace(
-                time = time,
-                distance = distanceUnits[index]
+                time = time, distance = distanceUnits[index]
             )
         }
     }
@@ -47,5 +49,9 @@ class Problem06 : Puzzle<Any, Any>(
             val high = (time.toDouble() + sqrt(time.toDouble().pow(2) - 4 * distance.toDouble())) / 2
             return ceil(high.dec()).toLong() - floor(low.inc()).toLong() + 1
         }
+    }
+
+    companion object {
+        val METADATA = PuzzleMetadata(year = 2023, day = 6, name = "Wait For It")
     }
 }

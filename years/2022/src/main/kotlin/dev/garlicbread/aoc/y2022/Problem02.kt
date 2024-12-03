@@ -1,17 +1,22 @@
 package dev.garlicbread.aoc.y2022
 
+import dev.garlicbread.aoc.core.FileInputProvider
+import dev.garlicbread.aoc.core.InputProvider
 import dev.garlicbread.aoc.core.Puzzle
+import dev.garlicbread.aoc.core.PuzzleMetadata
 import dev.garlicbread.aoc.core.solve
+
 
 fun main() = solve(
     benchmark = false,
 ) { Problem02() }
 
-class Problem02 : Puzzle<Int, Int>(
-    year = 2022,
-    day = 2,
+class Problem02(
+    inputProvider: InputProvider = FileInputProvider(METADATA)
+) : Puzzle<Int, Int>(
+    metadata = METADATA
 ) {
-    override val input = rawInput.map { it.split(" ") }
+    override val input = inputProvider.provideStringListInput().map { it.split(" ") }
 
     override fun solvePartOne(): Int {
         var score = 0
@@ -110,4 +115,8 @@ class Problem02 : Puzzle<Int, Int>(
     data class Round(val opponentMove: Move, val userMove: Move)
 
     data class DeterministicRound(val opponentMove: Move, val outcome: Outcome)
+
+    companion object {
+        val METADATA = PuzzleMetadata(year = 2022, day = 2, name = "Rock Paper Scissors")
+    }
 }

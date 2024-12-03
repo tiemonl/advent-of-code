@@ -1,6 +1,9 @@
 package dev.garlicbread.aoc.y2015
 
+import dev.garlicbread.aoc.core.FileInputProvider
+import dev.garlicbread.aoc.core.InputProvider
 import dev.garlicbread.aoc.core.Puzzle
+import dev.garlicbread.aoc.core.PuzzleMetadata
 import dev.garlicbread.aoc.core.solve
 import dev.garlicbread.aoc.utils.transpose
 
@@ -9,12 +12,12 @@ fun main() = solve(
 ) { Problem14() }
 
 class Problem14(
-    val totalTime: Int = 2503
+    val totalTime: Int = 2503,
+    inputProvider: InputProvider = FileInputProvider(METADATA)
 ) : Puzzle<Int, Int>(
-    year = 2015,
-    day = 14,
+    metadata = METADATA
 ) {
-    override val input = rawInput.map { reindeer ->
+    override val input = inputProvider.provideStringListInput().map { reindeer ->
         "^.*\\b(\\d+)\\b.*\\b(\\d+)\\b.*\\b(\\d+)\\b.*\$".toRegex()
             .matchEntire(reindeer)!!.destructured.let { (speed, running, rest) ->
                 Reindeer(
@@ -42,4 +45,8 @@ class Problem14(
     }.transpose().maxOf { it.sum() }
 
     data class Reindeer(val speed: Int, val running: Int, val runningRest: Int)
+
+    companion object {
+        val METADATA = PuzzleMetadata(year = 2015, day = 14, name = "Reindeer Olympics")
+    }
 }

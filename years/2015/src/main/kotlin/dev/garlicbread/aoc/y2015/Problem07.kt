@@ -1,6 +1,9 @@
 package dev.garlicbread.aoc.y2015
 
+import dev.garlicbread.aoc.core.FileInputProvider
+import dev.garlicbread.aoc.core.InputProvider
 import dev.garlicbread.aoc.core.Puzzle
+import dev.garlicbread.aoc.core.PuzzleMetadata
 import dev.garlicbread.aoc.core.solve
 
 fun main() = solve(
@@ -9,11 +12,12 @@ fun main() = solve(
 
 class Problem07(
     val wireSolution: String = "a",
+    inputProvider: InputProvider = FileInputProvider(METADATA)
 ) : Puzzle<Int, Int>(
-    year = 2015,
-    day = 7,
+    metadata = METADATA
 ) {
-    override val input = rawInput.map { it.split(" -> ").let { (from, to) -> Instruction(from, to) } }
+    override val input =
+        inputProvider.provideStringListInput().map { it.split(" -> ").let { (from, to) -> Instruction(from, to) } }
 
     private val wires = mutableMapOf<String, Int>()
 
@@ -108,4 +112,8 @@ class Problem07(
 
     private fun Int.complement() =
         this.toString(2).padStart(16, '0').map { if (it == '0') '1' else '0' }.joinToString("").toInt(2)
+
+    companion object {
+        val METADATA = PuzzleMetadata(year = 2015, day = 7, name = "Some Assembly Required")
+    }
 }

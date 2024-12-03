@@ -1,19 +1,24 @@
 package dev.garlicbread.aoc.y2021
 
+import dev.garlicbread.aoc.core.FileInputProvider
+import dev.garlicbread.aoc.core.InputProvider
 import dev.garlicbread.aoc.core.Puzzle
+import dev.garlicbread.aoc.core.PuzzleMetadata
 import dev.garlicbread.aoc.core.solve
 
 fun main() = solve(
     benchmark = false,
 ) { Problem20() }
 
-class Problem20 : Puzzle<Int, Int>(
-    year = 2021,
-    day = 20,
+class Problem20(
+    inputProvider: InputProvider = FileInputProvider(METADATA)
+) : Puzzle<Int, Int>(
+    metadata = METADATA
 ) {
     override val input = TrenchMap(
-        algorithm = rawInput.first().map { if (it == '#') '1' else '0' },
-        image = rawInput.drop(2).map { row -> row.map { if (it == '#') '1' else '0' }.joinToString("") },
+        algorithm = inputProvider.provideStringListInput().first().map { if (it == '#') '1' else '0' },
+        image = inputProvider.provideStringListInput().drop(2)
+            .map { row -> row.map { if (it == '#') '1' else '0' }.joinToString("") },
     )
 
     override fun solvePartOne() = enhance(2)
@@ -39,4 +44,8 @@ class Problem20 : Puzzle<Int, Int>(
         val algorithm: List<Char>,
         val image: List<String>,
     )
+
+    companion object {
+        val METADATA = PuzzleMetadata(year = 2021, day = 20, name = "")
+    }
 }

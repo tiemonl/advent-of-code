@@ -1,6 +1,9 @@
 package dev.garlicbread.aoc.y2021
 
+import dev.garlicbread.aoc.core.FileInputProvider
+import dev.garlicbread.aoc.core.InputProvider
 import dev.garlicbread.aoc.core.Puzzle
+import dev.garlicbread.aoc.core.PuzzleMetadata
 import dev.garlicbread.aoc.core.solve
 import dev.garlicbread.aoc.utils.median
 import java.util.Stack
@@ -9,11 +12,12 @@ fun main() = solve(
     benchmark = false,
 ) { Problem10() }
 
-class Problem10 : Puzzle<Int, Long>(
-    year = 2021,
-    day = 10,
+class Problem10(
+    inputProvider: InputProvider = FileInputProvider(METADATA)
+) : Puzzle<Int, Long>(
+    metadata = METADATA
 ) {
-    override val input = rawInput
+    override val input = inputProvider.provideStringListInput()
 
     override fun solvePartOne(): Int {
         val unexpectedChar = mutableListOf<Int>()
@@ -97,4 +101,8 @@ class Problem10 : Puzzle<Int, Long>(
             ']' -> 2
             else -> 4
         }
+
+    companion object {
+        val METADATA = PuzzleMetadata(year = 2021, day = 10, name = "")
+    }
 }

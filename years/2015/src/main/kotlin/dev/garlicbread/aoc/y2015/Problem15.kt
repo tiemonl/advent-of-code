@@ -1,6 +1,9 @@
 package dev.garlicbread.aoc.y2015
 
+import dev.garlicbread.aoc.core.FileInputProvider
+import dev.garlicbread.aoc.core.InputProvider
 import dev.garlicbread.aoc.core.Puzzle
+import dev.garlicbread.aoc.core.PuzzleMetadata
 import dev.garlicbread.aoc.core.solve
 import dev.garlicbread.aoc.utils.combinationSum
 import dev.garlicbread.aoc.utils.product
@@ -10,11 +13,12 @@ fun main() = solve(
     benchmark = false,
 ) { Problem15() }
 
-class Problem15 : Puzzle<Int, Int>(
-    year = 2015,
-    day = 15,
+class Problem15(
+    inputProvider: InputProvider = FileInputProvider(METADATA)
+) : Puzzle<Int, Int>(
+    metadata = METADATA
 ) {
-    override val input = rawInput.map { ingredient ->
+    override val input = inputProvider.provideStringListInput().map { ingredient ->
         "(\\w+).* (-?\\d+).* (-?\\d+).* (-?\\d+).* (-?\\d+).* (-?\\d+).*".toRegex()
             .matchEntire(ingredient)!!.destructured.let { (name, capacity, durability, flavor, texture, calories) ->
                 Ingredient(
@@ -62,5 +66,9 @@ class Problem15 : Puzzle<Int, Int>(
     ) {
         fun partOne() = listOf(capacity, durability, flavor, texture)
         fun partTwo() = listOf(capacity, durability, flavor, texture, calories)
+    }
+
+    companion object {
+        val METADATA = PuzzleMetadata(year = 2015, day = 15, name = "Science for Hungry People")
     }
 }

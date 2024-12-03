@@ -26,8 +26,8 @@ createtestfile() {
   echo "package dev.garlicbread.aoc.y${year}
 
 import com.google.common.truth.Truth.assertThat
-import dev.garlicbread.aoc.core.Solver
-import org.junit.jupiter.api.BeforeEach
+import dev.garlicbread.aoc.core.FileInputProvider
+import dev.garlicbread.aoc.core.PuzzleMetadata
 import org.junit.jupiter.api.DisplayName
 import org.junit.jupiter.api.Nested
 import org.junit.jupiter.api.Test
@@ -35,11 +35,7 @@ import org.junit.jupiter.api.Test
 @DisplayName(\"$year Day $day\")
 internal class Problem${paddedDay}Test {
 
-    @BeforeEach
-    fun setUp() {
-        Solver.suffix = \"\"
-        Solver.inputProvider = Solver.defaultInputProvider
-    }
+    val metadata = PuzzleMetadata(year = $year, day = $day)
 
     @Nested
     @DisplayName(\"Part 1\")
@@ -47,15 +43,16 @@ internal class Problem${paddedDay}Test {
         @Test
         @DisplayName(\"Example Input 1\")
         fun \`Matches example 1\`() {
-            Solver.suffix = \"_1\"
-            val answer = Problem${paddedDay}().solvePartOne()
+            val puzzle = Problem${paddedDay}(FileInputProvider(metadata, \"_1\"))
+            val answer = puzzle.solvePartOne()
             assertThat(answer).isEqualTo(-1)
         }
 
         @Test
         @DisplayName(\"Actual Input\")
         fun \`Matches actual\`() {
-            val answer = Problem${paddedDay}().solvePartOne()
+            val puzzle = Problem${paddedDay}(FileInputProvider(metadata))
+            val answer = puzzle.solvePartOne()
             assertThat(answer).isEqualTo(-1)
         }
     }
@@ -66,21 +63,22 @@ internal class Problem${paddedDay}Test {
         @Test
         @DisplayName(\"Example Input 1\")
         fun \`Matches example 1\`() {
-            Solver.suffix = \"_1\"
-            val answer = Problem${paddedDay}().solvePartTwo()
+            val puzzle = Problem${paddedDay}(FileInputProvider(metadata, \"_1\"))
+            val answer = puzzle.solvePartTwo()
             assertThat(answer).isEqualTo(-1)
         }
 
         @Test
         @DisplayName(\"Actual Input\")
         fun \`Matches actual\`() {
-            val answer = Problem${paddedDay}().solvePartTwo()
+            val puzzle = Problem${paddedDay}(FileInputProvider(metadata))
+            val answer = puzzle.solvePartTwo()
             assertThat(answer).isEqualTo(-1)
         }
     }
 }" >"${file}"
 
-  local inputfolder=years/$year/src/test/resources/
+  local inputfolder=input/$year/test/
   local inputfile="${inputfolder}input${day}_1.in"
   if [[ -e $inputfile ]]; then
     read -p "File exists: ${inputfile}. Overwrite? (y/N) " -r overwrite

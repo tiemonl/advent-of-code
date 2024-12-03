@@ -1,25 +1,9 @@
 package dev.garlicbread.aoc.core
 
-import java.nio.file.Files
-import java.nio.file.Paths
 import kotlin.system.measureNanoTime
 
-object Solver {
-    var suffix: String = ""
-
-    val defaultInputProvider: (year: Int, day: Int) -> List<String> = { _, day ->
-        Puzzle::class.java.classLoader
-            ?.getResource("input$day$suffix.in")
-            ?.toURI()
-            ?.let { Paths.get(it) }
-            .let { Files.readAllLines(it) }
-    }
-
-    var inputProvider: (year: Int, day: Int) -> List<String> = defaultInputProvider
-}
-
 fun <T : Any, R : Any> solve(benchmark: Boolean = false, block: () -> Puzzle<T, R>) {
-    Solver.inputProvider = Solver.defaultInputProvider
+    InputProvider.provider = FileInputProvider(block().metadata)
     printResult(block)
     if (benchmark) {
         println()
@@ -31,7 +15,7 @@ fun <T : Any, R : Any> printResult(block: () -> Puzzle<T, R>) {
     val puzzle = block()
     val partOneResult = puzzle.solvePartOne().bold(CYAN)
     val partTwoResult = puzzle.solvePartTwo().bold(CYAN)
-    println("${puzzle.year} - Day ${puzzle.day}\n${puzzle.name}".christmas())
+    println("${puzzle.metadata.year} - Day ${puzzle.metadata.day}\n${puzzle.metadata.name}".christmas())
     println("Part 1: $partOneResult")
     println("Part 2: $partTwoResult")
 }
@@ -42,7 +26,7 @@ private fun benchmark(block: () -> Puzzle<*, *>) {
     var partOneTime = 0L
     var partTwoTime = 0L
     var times = 0
-    while (times < 1000) {
+    while (times < 10000) {
         times++
         if (times % 100 == 0) print("\rBenchmarking... ($times runs)")
         lateinit var p: Puzzle<*, *>
@@ -72,7 +56,7 @@ private fun printPartBenchmark(part: Int, time: Float, initTime: Float) {
     println(
         "Part $part took " +
                 "%.3fms".format(time).bold(YELLOW) +
-            ", including init: " +
+                ", including init: " +
                 "%.3fms".format((initTime + time)).bold(YELLOW),
     )
 }

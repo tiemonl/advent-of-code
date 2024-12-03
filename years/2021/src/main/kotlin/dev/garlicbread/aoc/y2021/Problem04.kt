@@ -1,6 +1,9 @@
 package dev.garlicbread.aoc.y2021
 
+import dev.garlicbread.aoc.core.FileInputProvider
+import dev.garlicbread.aoc.core.InputProvider
 import dev.garlicbread.aoc.core.Puzzle
+import dev.garlicbread.aoc.core.PuzzleMetadata
 import dev.garlicbread.aoc.core.solve
 import dev.garlicbread.aoc.utils.transpose
 
@@ -8,11 +11,12 @@ fun main() = solve(
     benchmark = false,
 ) { Problem04() }
 
-class Problem04 : Puzzle<Int, Int>(
-    year = 2021,
-    day = 4,
+class Problem04(
+    inputProvider: InputProvider = FileInputProvider(METADATA)
+) : Puzzle<Int, Int>(
+    metadata = METADATA
 ) {
-    override val input = rawInput.joinToString("\n").split("\n\n")
+    override val input = inputProvider.provideStringListInput().joinToString("\n").split("\n\n")
     private val draw = mutableListOf<Int>()
     private val bingoBoards = mutableListOf<Bingo>()
 
@@ -74,7 +78,7 @@ class Problem04 : Puzzle<Int, Int>(
 
     private fun checkWin(bingo: Bingo) =
         bingo.board.asSequence().map { row -> row.all { it.isMarked } }.any { it } ||
-            bingo.transposedBoard.asSequence().map { col -> col.all { it.isMarked } }.any { it }
+                bingo.transposedBoard.asSequence().map { col -> col.all { it.isMarked } }.any { it }
 
     data class Bingo(
         val board: List<List<Cell>>,
@@ -88,5 +92,9 @@ class Problem04 : Puzzle<Int, Int>(
         fun mark() {
             isMarked = true
         }
+    }
+
+    companion object {
+        val METADATA = PuzzleMetadata(year = 2021, day = 4, name = "Giant Squid")
     }
 }

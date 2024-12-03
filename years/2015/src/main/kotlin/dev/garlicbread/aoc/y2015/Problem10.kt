@@ -1,6 +1,9 @@
 package dev.garlicbread.aoc.y2015
 
+import dev.garlicbread.aoc.core.FileInputProvider
+import dev.garlicbread.aoc.core.InputProvider
 import dev.garlicbread.aoc.core.Puzzle
+import dev.garlicbread.aoc.core.PuzzleMetadata
 import dev.garlicbread.aoc.core.solve
 
 fun main() = solve(
@@ -9,11 +12,11 @@ fun main() = solve(
 
 class Problem10(
     val repetitions: Int = 0,
+    inputProvider: InputProvider = FileInputProvider(METADATA)
 ) : Puzzle<Int, Int>(
-    year = 2015,
-    day = 10,
+    metadata = METADATA
 ) {
-    override val input = rawInput.first().toList()
+    override val input = inputProvider.provideStringInput().toList()
 
     override fun solvePartOne() =
         (1..if (repetitions != 0) repetitions else 40).fold(input) { acc, _ -> lookAndSay(acc) }.size
@@ -35,4 +38,8 @@ class Problem10(
         }
         currentChar?.let { append("$count$it") }
     }.toList()
+
+    companion object {
+        val METADATA = PuzzleMetadata(year = 2015, day = 10, name = "Elves Look, Elves Say")
+    }
 }

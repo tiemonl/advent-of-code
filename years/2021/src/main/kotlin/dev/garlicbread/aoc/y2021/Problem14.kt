@@ -1,17 +1,21 @@
 package dev.garlicbread.aoc.y2021
 
+import dev.garlicbread.aoc.core.FileInputProvider
+import dev.garlicbread.aoc.core.InputProvider
 import dev.garlicbread.aoc.core.Puzzle
+import dev.garlicbread.aoc.core.PuzzleMetadata
 import dev.garlicbread.aoc.core.solve
 
 fun main() = solve(
     benchmark = false,
 ) { Problem14() }
 
-class Problem14 : Puzzle<Long, Long>(
-    year = 2021,
-    day = 14,
+class Problem14(
+    inputProvider: InputProvider = FileInputProvider(METADATA)
+) : Puzzle<Long, Long>(
+    metadata = METADATA
 ) {
-    override val input = rawInput.joinToString("\n").split("\n\n")
+    override val input = inputProvider.provideStringListInput().joinToString("\n").split("\n\n")
     private lateinit var polymer: MutableMap<String, Long>
     private lateinit var score: MutableMap<Char, Long>
     private lateinit var rules: List<Pair<String, Char>>
@@ -57,5 +61,9 @@ class Problem14 : Puzzle<Long, Long>(
             val split = it.split(" -> ")
             Pair(split[0], split[1].first())
         }
+    }
+
+    companion object {
+        val METADATA = PuzzleMetadata(year = 2021, day = 14, name = "")
     }
 }

@@ -1,18 +1,21 @@
 package dev.garlicbread.aoc.y2023
 
+import dev.garlicbread.aoc.core.FileInputProvider
+import dev.garlicbread.aoc.core.InputProvider
 import dev.garlicbread.aoc.core.Puzzle
+import dev.garlicbread.aoc.core.PuzzleMetadata
 import dev.garlicbread.aoc.core.solve
 
 fun main() = solve(
     benchmark = false,
 ) { Problem07() }
 
-class Problem07 : Puzzle<Any, Any>(
-    year = 2023,
-    day = 7,
-    name = "Camel Cards",
+class Problem07(
+    inputProvider: InputProvider = FileInputProvider(METADATA)
+) : Puzzle<Int, Int>(
+    metadata = METADATA
 ) {
-    override val input = rawInput.map { cardBid ->
+    override val input = inputProvider.provideStringListInput().map { cardBid ->
         cardBid.split(" ").let { (card, bid) ->
             CamelCard(
                 hand = card,
@@ -95,4 +98,7 @@ class Problem07 : Puzzle<Any, Any>(
     private fun List<CamelCard>.calculateScore() =
         this.mapIndexed { index, camelCard -> index.inc() * camelCard.bid }.sum()
 
+    companion object {
+        val METADATA = PuzzleMetadata(year = 2023, day = 7, name = "Camel Cards")
+    }
 }

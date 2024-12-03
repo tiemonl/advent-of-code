@@ -1,6 +1,9 @@
 package dev.garlicbread.aoc.y2021
 
+import dev.garlicbread.aoc.core.FileInputProvider
+import dev.garlicbread.aoc.core.InputProvider
 import dev.garlicbread.aoc.core.Puzzle
+import dev.garlicbread.aoc.core.PuzzleMetadata
 import dev.garlicbread.aoc.core.solve
 import dev.garlicbread.aoc.models.Point
 
@@ -8,11 +11,12 @@ fun main() = solve(
     benchmark = false,
 ) { Problem02() }
 
-class Problem02 : Puzzle<Int, Int>(
-    year = 2021,
-    day = 2,
+class Problem02(
+    inputProvider: InputProvider = FileInputProvider(METADATA)
+) : Puzzle<Int, Int>(
+    metadata = METADATA
 ) {
-    override val input = rawInput.map { it.toCommand() }
+    override val input = inputProvider.provideStringListInput().map { it.toCommand() }
 
     override fun solvePartOne(): Int {
         return input.fold(Point(0, 0)) { acc, command ->
@@ -50,5 +54,9 @@ class Problem02 : Puzzle<Int, Int>(
         class Forward(amount: Int) : Command(amount)
         class Down(amount: Int) : Command(amount)
         class Up(amount: Int) : Command(amount)
+    }
+
+    companion object {
+        val METADATA = PuzzleMetadata(year = 2024, day = 2, name = "Dive!")
     }
 }
