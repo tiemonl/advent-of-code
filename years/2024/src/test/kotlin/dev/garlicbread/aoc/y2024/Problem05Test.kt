@@ -20,7 +20,7 @@ internal class Problem05Test {
         fun `Matches example 1`() {
             val puzzle = Problem05(FileInputProvider(metadata, "_1"))
             val answer = puzzle.solvePartOne()
-            assertThat(answer).isEqualTo(-1)
+            assertThat(answer).isEqualTo(143)
         }
 
         @Test
@@ -28,7 +28,7 @@ internal class Problem05Test {
         fun `Matches actual`() {
             val puzzle = Problem05(FileInputProvider(metadata))
             val answer = puzzle.solvePartOne()
-            assertThat(answer).isEqualTo(-1)
+            assertThat(answer).isEqualTo(5129)
         }
     }
 
@@ -40,7 +40,7 @@ internal class Problem05Test {
         fun `Matches example 1`() {
             val puzzle = Problem05(FileInputProvider(metadata, "_1"))
             val answer = puzzle.solvePartTwo()
-            assertThat(answer).isEqualTo(-1)
+            assertThat(answer).isEqualTo(123)
         }
 
         @Test
@@ -48,7 +48,7 @@ internal class Problem05Test {
         fun `Matches actual`() {
             val puzzle = Problem05(FileInputProvider(metadata))
             val answer = puzzle.solvePartTwo()
-            assertThat(answer).isEqualTo(-1)
+            assertThat(answer).isEqualTo(4077)
         }
     }
 }
