@@ -1,0 +1,10 @@
+product:
+  type: lib
+  platforms: [jvm]
+
+apply:
+  - ../../templates/testing.module-template.yaml
+
+dependencies:
+  - ../core
+  - ../models

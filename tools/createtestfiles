@@ -11,7 +11,7 @@ createtestfile() {
     exit 1
   fi
 
-  local puzzledir="years/$year/src/test/kotlin/dev/garlicbread/aoc/y$year/"
+  local puzzledir="years/$year/test/dev/garlicbread/aoc/y$year/"
   if [[ ! -e "$puzzledir" ]]; then
     mkdir -p "$puzzledir"
   fi

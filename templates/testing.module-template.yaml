@@ -1,0 +1,5 @@
+test-dependencies:
+  - $kotlin.test
+  - $kotlin.test.junit5
+  - $libs.google.truth
+  - $libs.guava

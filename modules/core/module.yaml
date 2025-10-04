@@ -1,0 +1,12 @@
+product:
+  type: lib
+  platforms: [jvm]
+
+dependencies:
+  - $libs.kotlin.gradle.plugin: exported
+  - $libs.kotlin.stdlib: exported
+
+settings:
+  kotlin:
+    languageVersion: 2.2
+    serialization: enabled
