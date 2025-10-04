@@ -28,3 +28,9 @@ fun <T> List<List<T>>.elementAt(point: Point): T = this[point.y][point.x]
 
 fun Array<CharArray>.isSafe(at: Point) =
     at.y in this.indices && at.x in this[at.y].indices
+
+fun <T> MutableList<T>.swap(index1: Int, index2: Int) {
+    val temp = this[index1]
+    this[index1] = this[index2]
+    this[index2] = temp
+}
