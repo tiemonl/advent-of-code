@@ -1,5 +1,11 @@
 name: Build and Test
+
+permissions:
+  checks: write
+  pull-requests: write
+
 on: [ push ]
+
 jobs:
   build-test:
     runs-on: ubuntu-latest
@@ -24,3 +30,8 @@ jobs:
 
       - name: Run tests with Amper
         run: ./amper test
+
+      - name: Upload Test Results
+        uses: EnricoMi/publish-unit-test-result-action@v2
+        with:
+          files: '**/build/reports/*/jvm/TEST-junit-jupiter.xml'
