@@ -34,12 +34,18 @@ jobs:
         run: chmod +x ./amper
 
       - name: Build with Amper
-        run: ./amper build
+        run: |
+          set -euo pipefail
+          ./amper build
 
       - name: Run tests with Amper
-        run: ./amper test
+        run: |
+          set -euo pipefail
+          ./amper test
 
       - name: Upload Test Results
         uses: EnricoMi/publish-unit-test-result-action@v2
+        if: always()  # still publish even if tests failed
         with:
           files: '**/build/reports/*/jvm/TEST-junit-jupiter.xml'
+          check_name: "Amper Tests"
