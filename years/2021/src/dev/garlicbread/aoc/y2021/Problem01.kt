@@ -18,13 +18,7 @@ class Problem01(
     override val input = inputProvider.provideIntListInput()
 
     override fun solvePartOne(): Int {
-        var increases = 0
-        for (i in 1..input.size.dec()) {
-            if (input[i] > input[i - 1]) {
-                increases++
-            }
-        }
-        return increases
+        return input.zipWithNext().count { it.second > it.first }
     }
 
     override fun solvePartTwo(): Int {

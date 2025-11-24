@@ -57,6 +57,6 @@ class Problem02(
     }
 
     companion object {
-        val METADATA = PuzzleMetadata(year = 2024, day = 2, name = "Dive!")
+        val METADATA = PuzzleMetadata(year = 2021, day = 2, name = "Dive!")
     }
 }
