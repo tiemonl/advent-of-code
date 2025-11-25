@@ -49,3 +49,12 @@ jobs:
         with:
           files: '**/build/reports/*/jvm/TEST-junit-jupiter.xml'
           check_name: "Amper Tests"
+
+      - name: Update README progress
+        run: ./amper run -m pipeline --main-class dev.garlicbread.aoc.pipeline.ProgressReportKt
+
+      - name: Commit README updates
+        uses: stefanzweifel/git-auto-commit-action@v7
+        with:
+          commit_message: '[bot] Update README.md star progress.'
+          file_pattern: 'README.md'

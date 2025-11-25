@@ -5,7 +5,6 @@ import dev.garlicbread.aoc.core.InputProvider
 import dev.garlicbread.aoc.core.Puzzle
 import dev.garlicbread.aoc.core.PuzzleMetadata
 import dev.garlicbread.aoc.core.solve
-import dev.garlicbread.aoc.models.Direction
 import dev.garlicbread.aoc.models.GridDirection
 import dev.garlicbread.aoc.models.Point
 import dev.garlicbread.aoc.utils.isSafe

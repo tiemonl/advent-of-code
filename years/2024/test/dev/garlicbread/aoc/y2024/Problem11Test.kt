@@ -14,7 +14,7 @@ internal class Problem11Test {
 
     @Nested
     @DisplayName("Part 1")
-    inner class PartOne {
+    inner class Part1 {
         @Test
         @DisplayName("Example Input 1")
         fun `Matches example 1`() {
@@ -50,7 +50,7 @@ internal class Problem11Test {
 
     @Nested
     @DisplayName("Part 2")
-    inner class PartTwo {
+    inner class Part2 {
         @Test
         @DisplayName("Actual Input")
         fun `Matches actual`() {

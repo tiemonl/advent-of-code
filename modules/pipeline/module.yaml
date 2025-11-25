@@ -1,0 +1,11 @@
+product:
+  type: jvm/app
+  platforms: [jvm]
+
+dependencies:
+  - $libs.kotlin.gradle.plugin
+  - $libs.kotlin.stdlib
+  - $libs.okio
+
+apply:
+  - ../../templates/settings.module-template.yaml
