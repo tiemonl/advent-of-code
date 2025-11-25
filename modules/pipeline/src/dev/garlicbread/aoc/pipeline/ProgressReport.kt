@@ -115,7 +115,7 @@ fun createProgressTable(solvedMap: Map<Int, Int>): String = buildString {
     }
 
     appendLine()
-    appendLine("<!-- PROGRESS-END -->")
+    append("<!-- PROGRESS-END -->")
 }
 
 fun updateTableInReadme(original: String, updatedTable: String): String {
