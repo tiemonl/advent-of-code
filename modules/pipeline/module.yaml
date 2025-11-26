@@ -5,6 +5,7 @@ product:
 dependencies:
   - $libs.kotlin.gradle.plugin
   - $libs.kotlin.stdlib
+  - $libs.kotlinx.datetime
   - $libs.okio
 
 apply:
