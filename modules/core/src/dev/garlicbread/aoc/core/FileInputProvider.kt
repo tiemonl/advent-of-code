@@ -11,7 +11,7 @@ class FileInputProvider(private val metadata: PuzzleMetadata, private val suffix
     }
 
     override fun provideStringInput(): String {
-        return Files.readString(getFile())
+        return Files.readString(getFile()).trim()
     }
 
     override fun provideIntListInput(): List<Int> {

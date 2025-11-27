@@ -1,0 +1,16 @@
+product:
+  type: jvm/app
+  platforms: [jvm]
+
+apply:
+  - ../../templates/testing.module-template.yaml
+
+dependencies:
+  - $libs.kotlin.stdlib
+  - ../../modules/core
+  - ../../modules/models
+  - ../../modules/utils
+
+settings:
+  kotlin:
+    serialization: json

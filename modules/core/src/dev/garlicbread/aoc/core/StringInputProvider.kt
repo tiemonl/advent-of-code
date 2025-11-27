@@ -6,7 +6,7 @@ class StringInputProvider(private val input: String, private val delimiter: Stri
     }
 
     override fun provideStringInput(): String {
-        return input
+        return input.trim()
     }
 
     override fun provideIntListInput(): List<Int> {
