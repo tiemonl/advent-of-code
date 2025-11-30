@@ -16,6 +16,8 @@ createpuzzlefile() {
   local puzzledir="years/$year/src/dev/garlicbread/aoc/y$year/"
   if [[ ! -e "$puzzledir" ]]; then
     mkdir -p "$puzzledir"
+    source tools/createmodulefile
+    createModuleFile "$year"
   fi
 
   local file="${puzzledir}Problem$paddedDay.kt"

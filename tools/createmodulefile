@@ -1,0 +1,26 @@
+#!/bin/bash
+
+createModuleFile() {
+    local year="$1"
+    local dir="years/$year"
+
+    mkdir -p "$dir"
+
+    cat > "$dir/module.yaml" <<EOF
+product:
+  type: jvm/app
+  platforms: [jvm]
+
+apply:
+  - ../../templates/testing.module-template.yaml
+  - ../../templates/settings.module-template.yaml
+
+dependencies:
+  - \$libs.kotlin.stdlib
+  - ../../modules/core
+  - ../../modules/models
+  - ../../modules/utils
+EOF
+
+    echo "Created: $dir/module.yaml"
+}
