@@ -27,7 +27,7 @@ class FileInputProvider(private val metadata: PuzzleMetadata, private val suffix
     override fun provideNestedIntListInput(): List<List<Int>> {
         return try {
             Files.readAllLines(getFile()).mapNotNull {
-                it.split(" ").mapNotNull { it.toIntOrNull() }
+                it.trim().split("\\s+".toRegex()).mapNotNull { it.toIntOrNull() }
             }
         } catch (e: Exception) {
             emptyList()
