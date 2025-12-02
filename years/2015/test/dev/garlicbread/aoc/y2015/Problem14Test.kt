@@ -1,8 +1,7 @@
 package dev.garlicbread.aoc.y2015
 
 import com.google.common.truth.Truth.assertThat
-import dev.garlicbread.aoc.core.FileInputProvider
-import dev.garlicbread.aoc.core.PuzzleMetadata
+import dev.garlicbread.aoc.core.fileInputProvider
 import org.junit.jupiter.api.DisplayName
 import org.junit.jupiter.api.Nested
 import org.junit.jupiter.api.Test
@@ -10,22 +9,20 @@ import org.junit.jupiter.api.Test
 @DisplayName("2015 Day 14")
 internal class Problem14Test {
 
-    val metadata = PuzzleMetadata(year = 2015, day = 14)
-
     @Nested
     @DisplayName("Part 1")
     inner class Part1 {
         @Test
         @DisplayName("Example Input 1")
         fun `Matches example 1`() {
-            val answer = Problem14(totalTime = 1000, FileInputProvider(metadata)).solvePartOne()
+            val answer = Problem14(totalTime = 1000, fileInputProvider<Problem14>()).solvePartOne()
             assertThat(answer).isEqualTo(1120)
         }
 
         @Test
         @DisplayName("Actual Input")
         fun `Matches actual`() {
-            val puzzle = Problem14(inputProvider = FileInputProvider(metadata))
+            val puzzle = Problem14(inputProvider = fileInputProvider<Problem14>())
             val answer = puzzle.solvePartOne()
             assertThat(answer).isEqualTo(2696)
         }
@@ -37,14 +34,14 @@ internal class Problem14Test {
         @Test
         @DisplayName("Example Input 1")
         fun `Matches example 1`() {
-            val answer = Problem14(totalTime = 1000, FileInputProvider(metadata, "_1")).solvePartTwo()
+            val answer = Problem14(totalTime = 1000, fileInputProvider<Problem14>("_1")).solvePartTwo()
             assertThat(answer).isEqualTo(689)
         }
 
         @Test
         @DisplayName("Actual Input")
         fun `Matches actual`() {
-            val puzzle = Problem14(inputProvider = FileInputProvider(metadata))
+            val puzzle = Problem14(inputProvider = fileInputProvider<Problem14>())
             val answer = puzzle.solvePartTwo()
             assertThat(answer).isEqualTo(1084)
         }

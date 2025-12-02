@@ -1,20 +1,19 @@
 package dev.garlicbread.aoc.y2021
 
-import dev.garlicbread.aoc.core.FileInputProvider
+import dev.garlicbread.aoc.core.AocProblem
 import dev.garlicbread.aoc.core.InputProvider
-import dev.garlicbread.aoc.core.Puzzle
-import dev.garlicbread.aoc.core.PuzzleMetadata
+import dev.garlicbread.aoc.core.Problem
+import dev.garlicbread.aoc.core.fileInputProvider
 import dev.garlicbread.aoc.core.solve
 
 fun main() = solve(
     benchmark = false,
 ) { Problem18() }
 
+@AocProblem(year = 2021, day = 18, name = "Snailfish")
 class Problem18(
-    inputProvider: InputProvider = FileInputProvider(METADATA)
-) : Puzzle<Int, Int>(
-    metadata = METADATA
-) {
+    inputProvider: InputProvider = fileInputProvider<Problem18>()
+) : Problem<Int, Int>() {
     val rawInput = inputProvider.provideStringListInput()
     override val input = rawInput.map { parse(it) }
 
@@ -157,9 +156,5 @@ class Problem18(
 
             override fun toString() = "$value"
         }
-    }
-
-    companion object {
-        val METADATA = PuzzleMetadata(year = 2021, day = 18, name = "")
     }
 }

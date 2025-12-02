@@ -1,20 +1,19 @@
 package dev.garlicbread.aoc.y2021
 
-import dev.garlicbread.aoc.core.FileInputProvider
+import dev.garlicbread.aoc.core.AocProblem
 import dev.garlicbread.aoc.core.InputProvider
-import dev.garlicbread.aoc.core.Puzzle
-import dev.garlicbread.aoc.core.PuzzleMetadata
+import dev.garlicbread.aoc.core.Problem
+import dev.garlicbread.aoc.core.fileInputProvider
 import dev.garlicbread.aoc.core.solve
 
 fun main() = solve(
     benchmark = false,
 ) { Problem21() }
 
+@AocProblem(year = 2021, day = 21, name = "Dirac Dice")
 class Problem21(
-    inputProvider: InputProvider = FileInputProvider(METADATA)
-) : Puzzle<Int, Long>(
-    metadata = METADATA
-) {
+    inputProvider: InputProvider = fileInputProvider<Problem21>()
+) : Problem<Int, Long>() {
     override val input = inputProvider.provideStringListInput().map { it.substringAfterLast(": ").toInt() }
 
     private val diceOutcomes: Map<Int, Long> = mapOf(3 to 1, 4 to 3, 5 to 6, 6 to 7, 7 to 6, 8 to 3, 9 to 1)
@@ -87,9 +86,5 @@ class Problem21(
                 !p1Turn,
             )
         }
-    }
-
-    companion object {
-        val METADATA = PuzzleMetadata(year = 2021, day = 21, name = "")
     }
 }

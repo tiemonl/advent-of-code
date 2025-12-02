@@ -1,8 +1,7 @@
 package dev.garlicbread.aoc.y2021
 
 import com.google.common.truth.Truth.assertThat
-import dev.garlicbread.aoc.core.FileInputProvider
-import dev.garlicbread.aoc.core.PuzzleMetadata
+import dev.garlicbread.aoc.core.fileInputProvider
 import org.junit.jupiter.api.DisplayName
 import org.junit.jupiter.api.Nested
 import org.junit.jupiter.api.Test
@@ -10,15 +9,13 @@ import org.junit.jupiter.api.Test
 @DisplayName("2021 Day 2")
 internal class Problem02Test {
 
-    val metadata = PuzzleMetadata(year = 2021, day = 2)
-
     @Nested
     @DisplayName("Part 1")
     inner class Part1 {
         @Test
         @DisplayName("Example Input 1")
         fun `Matches example 1`() {
-            val puzzle = Problem02(FileInputProvider(metadata, "_1"))
+            val puzzle = Problem02(fileInputProvider<Problem02>("_1"))
             val answer = puzzle.solvePartOne()
             assertThat(answer).isEqualTo(150)
         }
@@ -26,7 +23,7 @@ internal class Problem02Test {
         @Test
         @DisplayName("Actual Input")
         fun `Matches actual`() {
-            val puzzle = Problem02(FileInputProvider(metadata))
+            val puzzle = Problem02(fileInputProvider<Problem02>())
             val answer = puzzle.solvePartOne()
             assertThat(answer).isEqualTo(1604850)
         }
@@ -38,7 +35,7 @@ internal class Problem02Test {
         @Test
         @DisplayName("Example Input 1")
         fun `Matches example 1`() {
-            val puzzle = Problem02(FileInputProvider(metadata, "_1"))
+            val puzzle = Problem02(fileInputProvider<Problem02>("_1"))
             val answer = puzzle.solvePartTwo()
             assertThat(answer).isEqualTo(900)
         }
@@ -46,7 +43,7 @@ internal class Problem02Test {
         @Test
         @DisplayName("Actual Input")
         fun `Matches actual`() {
-            val puzzle = Problem02(FileInputProvider(metadata))
+            val puzzle = Problem02(fileInputProvider<Problem02>())
             val answer = puzzle.solvePartTwo()
             assertThat(answer).isEqualTo(1685186100)
         }

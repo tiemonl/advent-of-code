@@ -1,21 +1,20 @@
 package dev.garlicbread.aoc.y2015
 
-import dev.garlicbread.aoc.core.FileInputProvider
+import dev.garlicbread.aoc.core.AocProblem
 import dev.garlicbread.aoc.core.InputProvider
-import dev.garlicbread.aoc.core.Puzzle
-import dev.garlicbread.aoc.core.PuzzleMetadata
+import dev.garlicbread.aoc.core.Problem
+import dev.garlicbread.aoc.core.fileInputProvider
 import dev.garlicbread.aoc.core.solve
 
 fun main() = solve(
     benchmark = false,
 ) { Problem07(wireSolution = "a") }
 
+@AocProblem(year = 2015, day = 7, name = "Some Assembly Required")
 class Problem07(
     val wireSolution: String = "a",
-    inputProvider: InputProvider = FileInputProvider(METADATA)
-) : Puzzle<Int, Int>(
-    metadata = METADATA
-) {
+    inputProvider: InputProvider = fileInputProvider<Problem07>()
+) : Problem<Int, Int>() {
     override val input =
         inputProvider.provideStringListInput().map { it.split(" -> ").let { (from, to) -> Instruction(from, to) } }
 
@@ -112,8 +111,4 @@ class Problem07(
 
     private fun Int.complement() =
         this.toString(2).padStart(16, '0').map { if (it == '0') '1' else '0' }.joinToString("").toInt(2)
-
-    companion object {
-        val METADATA = PuzzleMetadata(year = 2015, day = 7, name = "Some Assembly Required")
-    }
 }

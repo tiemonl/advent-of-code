@@ -1,21 +1,20 @@
 package dev.garlicbread.aoc.y2024
 
-import dev.garlicbread.aoc.core.FileInputProvider
+import dev.garlicbread.aoc.core.AocProblem
 import dev.garlicbread.aoc.core.InputProvider
-import dev.garlicbread.aoc.core.Puzzle
-import dev.garlicbread.aoc.core.PuzzleMetadata
+import dev.garlicbread.aoc.core.Problem
+import dev.garlicbread.aoc.core.fileInputProvider
 import dev.garlicbread.aoc.core.solve
 
 fun main() = solve(
     benchmark = true,
 ) { Problem11() }
 
+@AocProblem(year = 2024, day = 11, name = "Plutonian Pebbles")
 class Problem11(
-    inputProvider: InputProvider = FileInputProvider(METADATA),
+    inputProvider: InputProvider = fileInputProvider<Problem11>(),
     var blinks: Int = -1
-) : Puzzle<Any, Any>(
-    metadata = METADATA,
-) {
+) : Problem<Any, Any>() {
     override val input = buildMap<Long, Long> {
         inputProvider.provideStringInput().split(" ").forEach { insertStone(this, it.toLong()) }
     }
@@ -56,9 +55,5 @@ class Problem11(
                 }
             }
         }
-    }
-
-    companion object {
-        val METADATA = PuzzleMetadata(year = 2024, day = 11, name = "Plutonian Pebbles")
     }
 }

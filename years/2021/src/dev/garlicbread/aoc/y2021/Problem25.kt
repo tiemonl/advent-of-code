@@ -1,9 +1,9 @@
 package dev.garlicbread.aoc.y2021
 
-import dev.garlicbread.aoc.core.FileInputProvider
+import dev.garlicbread.aoc.core.AocProblem
 import dev.garlicbread.aoc.core.InputProvider
-import dev.garlicbread.aoc.core.Puzzle
-import dev.garlicbread.aoc.core.PuzzleMetadata
+import dev.garlicbread.aoc.core.Problem
+import dev.garlicbread.aoc.core.fileInputProvider
 import dev.garlicbread.aoc.core.solve
 import dev.garlicbread.aoc.models.Point
 
@@ -11,11 +11,10 @@ fun main() = solve(
     benchmark = false,
 ) { Problem25() }
 
+@AocProblem(year = 2021, day = 25, name = "Sea Cucumber")
 class Problem25(
-    inputProvider: InputProvider = FileInputProvider(METADATA)
-) : Puzzle<Int, Int>(
-    metadata = METADATA
-) {
+    inputProvider: InputProvider = fileInputProvider<Problem25>()
+) : Problem<Int, Int>() {
     private val rawInput = inputProvider.provideStringListInput()
 
     override val input = buildMap {
@@ -77,9 +76,5 @@ class Problem25(
             mutableGrid[cucumber.key] = '.'
         }
         return mutableGrid
-    }
-
-    companion object {
-        val METADATA = PuzzleMetadata(year = 2021, day = 25, name = "")
     }
 }

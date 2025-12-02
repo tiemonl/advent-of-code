@@ -1,6 +1,6 @@
 product:
   type: jvm/app
-  platforms: [jvm]
+  platforms: [ jvm ]
 
 apply:
   - ../../templates/testing.module-template.yaml

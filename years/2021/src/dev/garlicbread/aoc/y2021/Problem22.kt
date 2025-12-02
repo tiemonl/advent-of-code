@@ -1,9 +1,9 @@
 package dev.garlicbread.aoc.y2021
 
-import dev.garlicbread.aoc.core.FileInputProvider
+import dev.garlicbread.aoc.core.AocProblem
 import dev.garlicbread.aoc.core.InputProvider
-import dev.garlicbread.aoc.core.Puzzle
-import dev.garlicbread.aoc.core.PuzzleMetadata
+import dev.garlicbread.aoc.core.Problem
+import dev.garlicbread.aoc.core.fileInputProvider
 import dev.garlicbread.aoc.core.solve
 import dev.garlicbread.aoc.utils.intersect
 import dev.garlicbread.aoc.utils.intersects
@@ -13,11 +13,10 @@ fun main() = solve(
     benchmark = false,
 ) { Problem22() }
 
+@AocProblem(year = 2021, day = 22, name = "Reactor Reboot")
 class Problem22(
-    inputProvider: InputProvider = FileInputProvider(METADATA)
-) : Puzzle<Long, Long>(
-    metadata = METADATA
-) {
+    inputProvider: InputProvider = fileInputProvider<Problem22>()
+) : Problem<Long, Long>() {
     override val input = inputProvider.provideStringListInput().map { Cuboid.parse(it) }
     private val part1Cube = Cuboid(true, -50..50, -50..50, -50..50)
 
@@ -70,9 +69,5 @@ class Problem22(
                 )
             }
         }
-    }
-
-    companion object {
-        val METADATA = PuzzleMetadata(year = 2021, day = 22, name = "")
     }
 }

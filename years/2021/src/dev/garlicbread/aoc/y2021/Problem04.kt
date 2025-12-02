@@ -1,9 +1,9 @@
 package dev.garlicbread.aoc.y2021
 
-import dev.garlicbread.aoc.core.FileInputProvider
+import dev.garlicbread.aoc.core.AocProblem
 import dev.garlicbread.aoc.core.InputProvider
-import dev.garlicbread.aoc.core.Puzzle
-import dev.garlicbread.aoc.core.PuzzleMetadata
+import dev.garlicbread.aoc.core.Problem
+import dev.garlicbread.aoc.core.fileInputProvider
 import dev.garlicbread.aoc.core.solve
 import dev.garlicbread.aoc.utils.transpose
 
@@ -11,11 +11,10 @@ fun main() = solve(
     benchmark = false,
 ) { Problem04() }
 
+@AocProblem(year = 2021, day = 4, name = "Giant Squid")
 class Problem04(
-    inputProvider: InputProvider = FileInputProvider(METADATA)
-) : Puzzle<Int, Int>(
-    metadata = METADATA
-) {
+    inputProvider: InputProvider = fileInputProvider<Problem04>()
+) : Problem<Int, Int>() {
     override val input = inputProvider.provideStringListInput().joinToString("\n").split("\n\n")
     private val draw = mutableListOf<Int>()
     private val bingoBoards = mutableListOf<Bingo>()
@@ -92,9 +91,5 @@ class Problem04(
         fun mark() {
             isMarked = true
         }
-    }
-
-    companion object {
-        val METADATA = PuzzleMetadata(year = 2021, day = 4, name = "Giant Squid")
     }
 }

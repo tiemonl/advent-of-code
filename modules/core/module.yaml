@@ -5,6 +5,7 @@ product:
 dependencies:
   - $libs.kotlin.gradle.plugin: exported
   - $libs.kotlin.stdlib: exported
+  - $kotlin.reflect
 
 settings:
   kotlin:

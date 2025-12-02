@@ -1,9 +1,9 @@
 package dev.garlicbread.aoc.y2021
 
-import dev.garlicbread.aoc.core.FileInputProvider
+import dev.garlicbread.aoc.core.AocProblem
 import dev.garlicbread.aoc.core.InputProvider
-import dev.garlicbread.aoc.core.Puzzle
-import dev.garlicbread.aoc.core.PuzzleMetadata
+import dev.garlicbread.aoc.core.Problem
+import dev.garlicbread.aoc.core.fileInputProvider
 import dev.garlicbread.aoc.core.solve
 import dev.garlicbread.aoc.models.Point
 import dev.garlicbread.aoc.utils.pointsInBetween
@@ -13,11 +13,10 @@ fun main() = solve(
     benchmark = false,
 ) { Problem05() }
 
+@AocProblem(year = 2021, day = 5, name = "Hydrothermal Venture")
 class Problem05(
-    val inputProvider: InputProvider = FileInputProvider(METADATA)
-) : Puzzle<Int, Int>(
-    metadata = METADATA
-) {
+    val inputProvider: InputProvider = fileInputProvider<Problem05>()
+) : Problem<Int, Int>() {
     override val input = parseInput()
 
     override fun solvePartOne(): Int {
@@ -57,8 +56,4 @@ class Problem05(
     }
 
     private fun findNonDiagonalLines() = input.filter { it.first.x == it.second.x || it.first.y == it.second.y }
-
-    companion object {
-        val METADATA = PuzzleMetadata(year = 2021, day = 1, name = "Hydrothermal Venture")
-    }
 }

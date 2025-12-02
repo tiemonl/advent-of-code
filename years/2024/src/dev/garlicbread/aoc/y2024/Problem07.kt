@@ -1,9 +1,9 @@
 package dev.garlicbread.aoc.y2024
 
-import dev.garlicbread.aoc.core.FileInputProvider
+import dev.garlicbread.aoc.core.AocProblem
 import dev.garlicbread.aoc.core.InputProvider
-import dev.garlicbread.aoc.core.Puzzle
-import dev.garlicbread.aoc.core.PuzzleMetadata
+import dev.garlicbread.aoc.core.Problem
+import dev.garlicbread.aoc.core.fileInputProvider
 import dev.garlicbread.aoc.core.solve
 import kotlin.math.pow
 
@@ -11,11 +11,10 @@ fun main() = solve(
     benchmark = true,
 ) { Problem07() }
 
+@AocProblem(year = 2024, day = 7, name = "Bridge Repair")
 class Problem07(
-    inputProvider: InputProvider = FileInputProvider(METADATA)
-) : Puzzle<Any, Any>(
-    metadata = METADATA,
-) {
+    inputProvider: InputProvider = fileInputProvider<Problem07>()
+) : Problem<Any, Any>() {
     override val input = inputProvider.provideStringListInput().map { equation ->
         val (result, values) = equation.split(": ")
         Equation(
@@ -57,8 +56,4 @@ class Problem07(
         val result: Long,
         val values: List<Long>
     )
-
-    companion object {
-        val METADATA = PuzzleMetadata(year = 2024, day = 7, name = "Bridge Repair")
-    }
 }

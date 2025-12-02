@@ -1,20 +1,19 @@
 package dev.garlicbread.aoc.y2021
 
-import dev.garlicbread.aoc.core.FileInputProvider
+import dev.garlicbread.aoc.core.AocProblem
 import dev.garlicbread.aoc.core.InputProvider
-import dev.garlicbread.aoc.core.Puzzle
-import dev.garlicbread.aoc.core.PuzzleMetadata
+import dev.garlicbread.aoc.core.Problem
+import dev.garlicbread.aoc.core.fileInputProvider
 import dev.garlicbread.aoc.core.solve
 
 fun main() = solve(
     benchmark = false,
 ) { Problem14() }
 
+@AocProblem(year = 2021, day = 14, name = "Extended Polymerization")
 class Problem14(
-    inputProvider: InputProvider = FileInputProvider(METADATA)
-) : Puzzle<Long, Long>(
-    metadata = METADATA
-) {
+    inputProvider: InputProvider = fileInputProvider<Problem14>()
+) : Problem<Long, Long>() {
     override val input = inputProvider.provideStringListInput().joinToString("\n").split("\n\n")
     private lateinit var polymer: MutableMap<String, Long>
     private lateinit var score: MutableMap<Char, Long>
@@ -61,9 +60,5 @@ class Problem14(
             val split = it.split(" -> ")
             Pair(split[0], split[1].first())
         }
-    }
-
-    companion object {
-        val METADATA = PuzzleMetadata(year = 2021, day = 14, name = "")
     }
 }

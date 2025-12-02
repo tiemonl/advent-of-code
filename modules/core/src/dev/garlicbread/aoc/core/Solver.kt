@@ -2,7 +2,7 @@ package dev.garlicbread.aoc.core
 
 import kotlin.system.measureNanoTime
 
-fun <T : Any, R : Any> solve(benchmark: Boolean = false, block: () -> Puzzle<T, R>) {
+fun <T : Any, R : Any> solve(benchmark: Boolean = false, block: () -> Problem<T, R>) {
     InputProvider.provider = FileInputProvider(block().metadata)
     printResult(block)
     if (benchmark) {
@@ -11,7 +11,7 @@ fun <T : Any, R : Any> solve(benchmark: Boolean = false, block: () -> Puzzle<T, 
     }
 }
 
-fun <T : Any, R : Any> printResult(block: () -> Puzzle<T, R>) {
+fun <T : Any, R : Any> printResult(block: () -> Problem<T, R>) {
     val puzzle = block()
     val partOneResult = puzzle.solvePartOne().bold(CYAN)
     val partTwoResult = puzzle.solvePartTwo().bold(CYAN)
@@ -20,7 +20,7 @@ fun <T : Any, R : Any> printResult(block: () -> Puzzle<T, R>) {
     println("Part 2: $partTwoResult")
 }
 
-private fun benchmark(block: () -> Puzzle<*, *>) {
+private fun benchmark(block: () -> Problem<*, *>) {
     print("Benchmarking...")
     var initTime = 0L
     var partOneTime = 0L
@@ -29,7 +29,7 @@ private fun benchmark(block: () -> Puzzle<*, *>) {
     while (times < 10000) {
         times++
         if (times % 100 == 0) print("\rBenchmarking... ($times runs)")
-        lateinit var p: Puzzle<*, *>
+        lateinit var p: Problem<*, *>
         initTime += measureNanoTime { p = block() }
         partOneTime += measureNanoTime { p.solvePartOne() }
         partTwoTime += measureNanoTime { p.solvePartTwo() }

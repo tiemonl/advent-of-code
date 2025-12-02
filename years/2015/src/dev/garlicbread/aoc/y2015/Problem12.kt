@@ -1,9 +1,9 @@
 package dev.garlicbread.aoc.y2015
 
-import dev.garlicbread.aoc.core.FileInputProvider
+import dev.garlicbread.aoc.core.AocProblem
 import dev.garlicbread.aoc.core.InputProvider
-import dev.garlicbread.aoc.core.Puzzle
-import dev.garlicbread.aoc.core.PuzzleMetadata
+import dev.garlicbread.aoc.core.Problem
+import dev.garlicbread.aoc.core.fileInputProvider
 import dev.garlicbread.aoc.core.solve
 import kotlinx.serialization.json.Json
 import kotlinx.serialization.json.JsonArray
@@ -16,11 +16,10 @@ fun main() = solve(
     benchmark = false,
 ) { Problem12() }
 
+@AocProblem(year = 2015, day = 12, name = "JSAbacusFramework.io")
 class Problem12(
-    inputProvider: InputProvider = FileInputProvider(METADATA)
-) : Puzzle<Int, Int>(
-    metadata = METADATA
-) {
+    inputProvider: InputProvider = fileInputProvider<Problem12>()
+) : Problem<Int, Int>() {
     override val input = inputProvider.provideStringInput()
 
     override fun solvePartOne(): Int {
@@ -40,9 +39,5 @@ class Problem12(
         is JsonPrimitive -> json.contentOrNull?.toIntOrNull() ?: 0
         is JsonObject -> if (JsonPrimitive("red") in json.values) 0 else json.values.sumOf { sumNoRed(it) }
         is JsonArray -> json.sumOf { sumNoRed(it) }
-    }
-
-    companion object {
-        val METADATA = PuzzleMetadata(year = 2015, day = 12, name = "JSAbacusFramework.io")
     }
 }

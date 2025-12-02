@@ -1,20 +1,19 @@
 package dev.garlicbread.aoc.y2021
 
-import dev.garlicbread.aoc.core.FileInputProvider
+import dev.garlicbread.aoc.core.AocProblem
 import dev.garlicbread.aoc.core.InputProvider
-import dev.garlicbread.aoc.core.Puzzle
-import dev.garlicbread.aoc.core.PuzzleMetadata
+import dev.garlicbread.aoc.core.Problem
+import dev.garlicbread.aoc.core.fileInputProvider
 import dev.garlicbread.aoc.core.solve
 
 fun main() = solve(
     benchmark = false,
 ) { Problem08() }
 
+@AocProblem(year = 2021, day = 8, name = "Seven Segment Search")
 class Problem08(
-    inputProvider: InputProvider = FileInputProvider(METADATA)
-) : Puzzle<Int, Int>(
-    metadata = METADATA
-) {
+    inputProvider: InputProvider = fileInputProvider<Problem08>()
+) : Problem<Int, Int>() {
     override val input: List<Pair<String, String>> =
         inputProvider.provideStringListInput().map { it.split(" | ") }.map { Pair(it[0], it[1]) }
 
@@ -59,8 +58,4 @@ class Problem08(
 
     private fun String.overlaps(that: Set<Char>): Boolean = this.toSet().containsAll(that)
     private fun Set<Char>.overlaps(that: Set<Char>): Boolean = this.containsAll(that)
-
-    companion object {
-        val METADATA = PuzzleMetadata(year = 2021, day = 8, name = "")
-    }
 }

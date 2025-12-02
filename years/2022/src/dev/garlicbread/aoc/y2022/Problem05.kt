@@ -1,20 +1,19 @@
 package dev.garlicbread.aoc.y2022
 
-import dev.garlicbread.aoc.core.FileInputProvider
+import dev.garlicbread.aoc.core.AocProblem
 import dev.garlicbread.aoc.core.InputProvider
-import dev.garlicbread.aoc.core.Puzzle
-import dev.garlicbread.aoc.core.PuzzleMetadata
+import dev.garlicbread.aoc.core.Problem
+import dev.garlicbread.aoc.core.fileInputProvider
 import dev.garlicbread.aoc.core.solve
 
 fun main() = solve(
     benchmark = false,
 ) { Problem05() }
 
+@AocProblem(year = 2022, day = 5, name = "Supply Stacks")
 class Problem05(
-    inputProvider: InputProvider = FileInputProvider(METADATA)
-) : Puzzle<String, String>(
-    metadata = METADATA
-) {
+    inputProvider: InputProvider = fileInputProvider<Problem05>()
+) : Problem<String, String>() {
     override val input = inputProvider.provideStringListInput()
 
     override fun solvePartOne(): String = operateCrane(parseInput(), true)
@@ -72,8 +71,4 @@ class Problem05(
         val from: Int,
         val to: Int,
     )
-
-    companion object {
-        val METADATA = PuzzleMetadata(year = 2022, day = 5, name = "Supply Stacks")
-    }
 }

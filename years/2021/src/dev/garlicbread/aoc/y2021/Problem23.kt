@@ -1,9 +1,9 @@
 package dev.garlicbread.aoc.y2021
 
-import dev.garlicbread.aoc.core.FileInputProvider
+import dev.garlicbread.aoc.core.AocProblem
 import dev.garlicbread.aoc.core.InputProvider
-import dev.garlicbread.aoc.core.Puzzle
-import dev.garlicbread.aoc.core.PuzzleMetadata
+import dev.garlicbread.aoc.core.Problem
+import dev.garlicbread.aoc.core.fileInputProvider
 import dev.garlicbread.aoc.core.solve
 import java.util.PriorityQueue
 import kotlin.math.abs
@@ -12,11 +12,10 @@ fun main() = solve(
     benchmark = false,
 ) { Problem23() }
 
+@AocProblem(year = 2021, day = 23, name = "Amphipod")
 class Problem23(
-    inputProvider: InputProvider = FileInputProvider(METADATA)
-) : Puzzle<Int, Int>(
-    metadata = METADATA
-) {
+    inputProvider: InputProvider = fileInputProvider<Problem23>()
+) : Problem<Int, Int>() {
     val rawInput = inputProvider.provideStringListInput()
     override val input = rawInput
 
@@ -143,9 +142,5 @@ class Problem23(
         fun isEmptyOrHasAllValidAmphipods() = content.all { it == '.' || it == char }
 
         fun hasAmphipodsWithWrongType() = !isEmptyOrHasAllValidAmphipods()
-    }
-
-    companion object {
-        val METADATA = PuzzleMetadata(year = 2021, day = 23, name = "")
     }
 }

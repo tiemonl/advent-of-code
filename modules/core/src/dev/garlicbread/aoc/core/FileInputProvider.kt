@@ -4,7 +4,7 @@ import java.nio.file.Files
 import java.nio.file.Path
 import java.nio.file.Paths
 
-class FileInputProvider(private val metadata: PuzzleMetadata, private val suffix: String = "") : InputProvider {
+class FileInputProvider(private val metadata: ProblemMetadata, private val suffix: String = "") : InputProvider {
 
     override fun provideStringListInput(): List<String> {
         return Files.readAllLines(getFile())
@@ -60,3 +60,10 @@ class FileInputProvider(private val metadata: PuzzleMetadata, private val suffix
         }
     }
 }
+
+inline fun <reified T : Any> fileInputProvider(
+    suffix: String = ""
+): FileInputProvider = FileInputProvider(
+    metadata = problemMetadata<T>(),
+    suffix = suffix
+)

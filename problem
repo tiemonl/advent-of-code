@@ -1,11 +1,11 @@
 #!/bin/bash
 
 usage() {
-  echo "Usage: puzzle <year> <day> [<type1> <type2>]
-  <year> - 4-digit number denoting the year of the puzzle
-  <day> - number denoting the day of the puzzle, [1; 31]
-  <type1> - return type for the solution of the first part of the puzzle, default - Any
-  <type2> - return type for the solution of the second part of the puzzle, default - Any"
+  echo "Usage: problem <year> <day> [<type1> <type2>]
+  <year> - 4-digit number denoting the year of the problem
+  <day> - number denoting the day of the problem, [1; 31]
+  <type1> - return type for the solution of the first part of the problem, default - Any
+  <type2> - return type for the solution of the second part of the problem, default - Any"
 }
 
 getinput() {
@@ -17,10 +17,10 @@ getinput() {
     echo "Input already exists; skipping..."
   elif [[ -f .secret ]]; then
     echo "Fetching input data"
-    curl -b session=$(cat .secret) https://adventofcode.com/$YEAR/day/$DAY/input > $folder/input$DAY.in
+    curl -b session="$(cat .secret)" https://adventofcode.com/"$YEAR"/day/"$DAY"/input > "$folder"/input"$DAY".in
   else
     echo "Opening input file for editing"
-    "${EDITOR:-vim}" $folder/input$DAY.in
+    "${EDITOR:-vim}" "$folder"/input"$DAY".in
   fi
 }
 
@@ -43,13 +43,13 @@ TYPE2=${4:-Any}
 [[ $YEAR =~ ^[0-9]{4}$ ]] || invalidparam "Invalid year."
 [[ $DAY =~ ^[1-9][0-9]?$ ]] || invalidparam "Invalid day."
 
-echo "Creating puzzle for Year $YEAR, Day $DAY..."
-source tools/createpuzzlefile
+echo "Creating problem for Year $YEAR, Day $DAY..."
+source tools/createproblemfile
 
-createpuzzlefile $YEAR $DAY $TYPE1 $TYPE2
+createproblemfile "$YEAR" "$DAY" "$TYPE1" "$TYPE2"
 if [[ $? -eq 0 ]]; then
   getinput
   source tools/createtestfiles
-  createtestfile $YEAR $DAY $TYPE1 $TYPE2
+  createtestfile "$YEAR" "$DAY" "$TYPE1" "$TYPE2"
   echo "All done! Happy coding!"
 fi

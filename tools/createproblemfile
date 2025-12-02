@@ -1,6 +1,6 @@
 #!/bin/bash
 
-createpuzzlefile() {
+createproblemfile() {
   local year=$1
   local day=$2
   local paddedDay=$(printf "%02d" $day)
@@ -13,14 +13,14 @@ createpuzzlefile() {
     exit 1
   fi
 
-  local puzzledir="years/$year/src/dev/garlicbread/aoc/y$year/"
-  if [[ ! -e "$puzzledir" ]]; then
-    mkdir -p "$puzzledir"
+  local problemdir="years/$year/src/dev/garlicbread/aoc/y$year/"
+  if [[ ! -e "$problemdir" ]]; then
+    mkdir -p "$problemdir"
     source tools/createmodulefile
     createModuleFile "$year"
   fi
 
-  local file="${puzzledir}Problem$paddedDay.kt"
+  local file="${problemdir}Problem$paddedDay.kt"
   if [[ -e $file ]]; then
     read -p "File exists: ${file}. Overwrite? (y/N) " -r overwrite
     [[ "$overwrite" =~ ^[yY]$ ]] || return 0
@@ -32,24 +32,23 @@ createpuzzlefile() {
                          print $0
                      }')
 
-  echo "Creating puzzle class: $file"
+  echo "Creating problem class: $file"
   echo "package $package.y$year
 
-import ${package}.core.FileInputProvider
+import ${package}.core.AocProblem
 import ${package}.core.InputProvider
-import ${package}.core.Puzzle
-import ${package}.core.PuzzleMetadata
+import ${package}.core.Problem
+import ${package}.core.fileInputProvider
 import ${package}.core.solve
 
 fun main() = solve(
     benchmark = false,
 ) { Problem${paddedDay}() }
 
+@AocProblem(year = $year, day = $day, name = \"$name\")
 class Problem${paddedDay}(
-    inputProvider: InputProvider = FileInputProvider(METADATA)
- ): Puzzle<${type1}, ${type2}>(
-    metadata = METADATA,
-) {
+    inputProvider: InputProvider = fileInputProvider<Problem$paddedDay>()
+ ): Problem<${type1}, ${type2}>() {
     override val input = inputProvider.provideStringListInput()
 
     override fun solvePartOne(): ${type1} {
@@ -58,10 +57,6 @@ class Problem${paddedDay}(
 
     override fun solvePartTwo(): ${type2} {
         return 0
-    }
-
-    companion object {
-        val METADATA = PuzzleMetadata(year = $year, day = $day, name = \"$name\")
     }
 }" >"${file}"
 

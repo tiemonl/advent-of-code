@@ -1,9 +1,9 @@
 package dev.garlicbread.aoc.y2021
 
-import dev.garlicbread.aoc.core.FileInputProvider
+import dev.garlicbread.aoc.core.AocProblem
 import dev.garlicbread.aoc.core.InputProvider
-import dev.garlicbread.aoc.core.Puzzle
-import dev.garlicbread.aoc.core.PuzzleMetadata
+import dev.garlicbread.aoc.core.Problem
+import dev.garlicbread.aoc.core.fileInputProvider
 import dev.garlicbread.aoc.core.solve
 import dev.garlicbread.aoc.models.Point
 import java.util.PriorityQueue
@@ -12,11 +12,10 @@ fun main() = solve(
     benchmark = false,
 ) { Problem15() }
 
+@AocProblem(year = 2021, day = 15, name = "Chiton")
 class Problem15(
-    inputProvider: InputProvider = FileInputProvider(METADATA)
-) : Puzzle<Int, Int>(
-    metadata = METADATA
-) {
+    inputProvider: InputProvider = fileInputProvider<Problem15>()
+) : Problem<Int, Int>() {
     override val input = inputProvider.provideStringListInput().map { list ->
         list.map { risk ->
             risk.digitToInt()
@@ -83,9 +82,5 @@ class Problem15(
 
     private fun Point.validNeighbours(riskLevels: List<List<Int>>): List<Point> {
         return neighbors().filter { (x, y) -> y in riskLevels.indices && x in riskLevels.first().indices }
-    }
-
-    companion object {
-        val METADATA = PuzzleMetadata(year = 2021, day = 15, name = "")
     }
 }

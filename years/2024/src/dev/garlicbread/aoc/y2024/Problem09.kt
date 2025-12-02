@@ -1,9 +1,9 @@
 package dev.garlicbread.aoc.y2024
 
-import dev.garlicbread.aoc.core.FileInputProvider
+import dev.garlicbread.aoc.core.AocProblem
 import dev.garlicbread.aoc.core.InputProvider
-import dev.garlicbread.aoc.core.Puzzle
-import dev.garlicbread.aoc.core.PuzzleMetadata
+import dev.garlicbread.aoc.core.Problem
+import dev.garlicbread.aoc.core.fileInputProvider
 import dev.garlicbread.aoc.core.solve
 import dev.garlicbread.aoc.utils.swap
 
@@ -11,11 +11,10 @@ fun main() = solve(
     benchmark = false,
 ) { Problem09() }
 
+@AocProblem(year = 2024, day = 9, name = "Disk Fragmenter")
 class Problem09(
-    inputProvider: InputProvider = FileInputProvider(METADATA)
-) : Puzzle<Any, Any>(
-    metadata = METADATA,
-) {
+    inputProvider: InputProvider = fileInputProvider<Problem09>()
+) : Problem<Any, Any>() {
     override val input = inputProvider.provideStringInput()
 
     override fun solvePartOne(): Long {
@@ -118,9 +117,5 @@ class Problem09(
 
     private fun List<String>.calculateCheckSum() = this.withIndex().sumOf { (index, char) ->
         if (char != ".") index * char.toLong() else 0L
-    }
-
-    companion object {
-        val METADATA = PuzzleMetadata(year = 2024, day = 9, name = "Disk Fragmenter")
     }
 }

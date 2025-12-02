@@ -1,17 +1,14 @@
 package dev.garlicbread.aoc.y2021
 
 import com.google.common.truth.Truth.assertThat
-import dev.garlicbread.aoc.core.FileInputProvider
-import dev.garlicbread.aoc.core.PuzzleMetadata
 import dev.garlicbread.aoc.core.StringInputProvider
+import dev.garlicbread.aoc.core.fileInputProvider
 import org.junit.jupiter.api.DisplayName
 import org.junit.jupiter.api.Nested
 import org.junit.jupiter.api.Test
 
 @DisplayName("2021 Day 16")
 internal class Problem16Test {
-
-    val metadata = PuzzleMetadata(year = 2021, day = 16)
 
     @Nested
     @DisplayName("Part 1")
@@ -75,7 +72,7 @@ internal class Problem16Test {
         @Test
         @DisplayName("Actual Input")
         fun `Matches actual`() {
-            val puzzle = Problem16(FileInputProvider(metadata))
+            val puzzle = Problem16(fileInputProvider<Problem16>())
             val answer = puzzle.solvePartOne()
             assertThat(answer).isEqualTo(960)
         }
@@ -151,7 +148,7 @@ internal class Problem16Test {
         @Test
         @DisplayName("Actual Input")
         fun `Matches actual`() {
-            val puzzle = Problem16(FileInputProvider(metadata))
+            val puzzle = Problem16(fileInputProvider<Problem16>())
             val answer = puzzle.solvePartTwo()
             assertThat(answer).isEqualTo(12301926782560)
         }
