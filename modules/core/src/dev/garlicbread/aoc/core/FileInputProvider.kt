@@ -1,53 +1,83 @@
 package dev.garlicbread.aoc.core
 
-import java.nio.file.Files
-import java.nio.file.Path
-import java.nio.file.Paths
+import okio.FileSystem
+import okio.Path
+import okio.Path.Companion.toPath
 
-class FileInputProvider(private val metadata: ProblemMetadata, private val suffix: String = "") : InputProvider {
+class FileInputProvider(
+    private val metadata: ProblemMetadata,
+    private val suffix: String = "",
+    private val fileSystem: FileSystem = FileSystem.SYSTEM
+) : InputProvider {
 
-    override fun provideStringListInput(): List<String> {
-        return Files.readAllLines(getFile())
+    override fun provideStringListInput(): List<String> =
+        readFile { readUtf8().lineSequence().toList() }
+
+    override fun provideStringInput(): String =
+        readFile { readUtf8() }.trim()
+
+    override fun provideIntListInput(): List<Int> =
+        safeRead {
+            readUtf8().lineSequence()
+                .mapNotNull { it.toIntOrNull() }
+                .toList()
+        }
+
+    override fun provideNestedIntListInput(): List<List<Int>> =
+        safeRead {
+            readUtf8().lineSequence()
+                .mapNotNull { line ->
+                    val trimmed = line.trim()
+                    if (trimmed.isEmpty()) return@mapNotNull null
+
+                    val tokens = if (trimmed.contains(" "))
+                        trimmed.split("\\s+".toRegex())
+                    else
+                        listOf(trimmed)
+
+                    tokens.flatMap { token ->
+                        token.mapNotNull { it.digitToIntOrNull() }
+                    }.takeIf { !it.isEmpty() }
+                }
+                .toList()
+        }
+
+    override fun provideLongListInput(): List<Long> =
+        safeRead {
+            readUtf8().lineSequence()
+                .mapNotNull { it.toLongOrNull() }
+                .toList()
+        }
+
+    private fun <T> readFile(block: okio.BufferedSource.() -> T): T {
+        return fileSystem.read(getFilePath(), block)
     }
 
-    override fun provideStringInput(): String {
-        return Files.readString(getFile()).trim()
-    }
-
-    override fun provideIntListInput(): List<Int> {
+    private inline fun <reified T> safeRead(noinline block: okio.BufferedSource.() -> T): T {
         return try {
-            Files.readAllLines(getFile()).mapNotNull {
-                it.toIntOrNull()
-            }
+            readFile(block)
         } catch (e: Exception) {
-            emptyList()
+            when (T::class) {
+                List::class -> emptyList<Any>() as T
+                else -> throw e
+            }
         }
     }
 
-    override fun provideNestedIntListInput(): List<List<Int>> {
-        return try {
-            Files.readAllLines(getFile()).mapNotNull {
-                it.trim().split("\\s+".toRegex()).mapNotNull { it.toIntOrNull() }
-            }
-        } catch (e: Exception) {
-            emptyList()
-        }
-    }
-
-    override fun provideLongListInput(): List<Long> {
-        return try {
-            Files.readAllLines(getFile()).mapNotNull {
-                it.toLongOrNull()
-            }
-        } catch (e: Exception) {
-            emptyList()
-        }
-    }
-
-    private fun getFile(): Path {
+    private fun getFilePath(): Path {
         val rootPath = getRootDirectory()
-        val file = if (suffix.isEmpty()) "/input/${metadata.year}/main/input${metadata.day}.in" else "/input/${metadata.year}/test/input${metadata.day}$suffix.in"
-        return Paths.get(rootPath+file)
+        val relative = if (suffix.isEmpty()) {
+            "input/${metadata.year}/main/input${metadata.day}.in"
+        } else {
+            "input/${metadata.year}/test/input${metadata.day}$suffix.in"
+        }
+
+        // Ensure a single separator between root and relative path
+        return if (rootPath.endsWith("/")) {
+            "$rootPath$relative".toPath()
+        } else {
+            "$rootPath/$relative".toPath()
+        }
     }
 
     private fun getRootDirectory(): String {
