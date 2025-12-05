@@ -63,26 +63,10 @@ interface InputProvider {
     fun provideIntListInput(): List<Int>
 
     /**
-     * Returns each line parsed into a list of integers, supporting two formats:
+     * Returns each line parsed into a list of integers:
      *
-     * ### 1. Whitespace-separated integers
      * If the line contains spaces, each token is treated as an integer string,
      * and each character of each token is parsed individually.
-     *
-     * **Example**
-     * ```
-     * Line: "12 345"
-     * Output: [1, 2, 3, 4, 5]
-     * ```
-     *
-     * ### 2. Continuous digits (no whitespace)
-     * If the line contains no spaces, the entire line is treated as a sequence of digits.
-     *
-     * **Example**
-     * ```
-     * Line: "789"
-     * Output: [7, 8, 9]
-     * ```
      *
      * ### Combined Example Input
      * ```
@@ -95,8 +79,8 @@ interface InputProvider {
      * ```
      * [
      *   [1, 2, 3],
-     *   [1, 2, 3],
-     *   [1, 2, 3, 4, 5]
+     *   [123],
+     *   [12, 345]
      * ]
      * ```
      *
