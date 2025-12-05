@@ -14,7 +14,7 @@ fun main() = solve(
 class Problem03(
     inputProvider: InputProvider = fileInputProvider<Problem03>()
 ) : Problem<Any, Any>() {
-    override val input = inputProvider.provideNestedIntListInput()
+    override val input = inputProvider.provideStringListInput().map { it.map { it.digitToInt() } }
 
     override fun solvePartOne() = input.sumOf {
         largestSubsequenceNumber(it, 2)
