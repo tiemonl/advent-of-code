@@ -28,6 +28,21 @@ class FileInputProviderTest {
         }
 
         @Test
+        fun `returns all lines except last if there is no text`() = withProvider(
+            lines = listOf(
+                "abc",
+                "",
+                "def",
+                "ghi",
+                ""
+            )
+        ) { provider ->
+            val result = provider.provideStringListInput()
+
+            assertThat(result).containsExactly("abc", "", "def", "ghi").inOrder()
+        }
+
+        @Test
         fun `returns empty list when file missing`() {
             val originalUserDir = System.getProperty("user.dir")
             val fs = FakeFileSystem()
@@ -151,8 +166,8 @@ class FileInputProviderTest {
             assertThat(result).isEqualTo(
                 listOf(
                     listOf(1, 2, 3),
-                    listOf(1, 2, 3),
-                    listOf(1, 2, 3, 4, 5)
+                    listOf(123),
+                    listOf(12, 345)
                 )
             )
         }
@@ -160,7 +175,7 @@ class FileInputProviderTest {
         @Test
         fun `parses only continuous digit lines`() = withProvider(
             lines = listOf(
-                "123",
+                "123 45",
                 "4567",
                 "  89  "
             )
@@ -169,9 +184,9 @@ class FileInputProviderTest {
 
             assertThat(result).isEqualTo(
                 listOf(
-                    listOf(1, 2, 3),
-                    listOf(4, 5, 6, 7),
-                    listOf(8, 9)
+                    listOf(123, 45),
+                    listOf(4567),
+                    listOf(89)
                 )
             )
         }
@@ -190,7 +205,7 @@ class FileInputProviderTest {
             val result = provider.provideNestedIntListInput()
             assertThat(result).isEqualTo(
                 listOf(
-                    listOf(4, 2)
+                    listOf(42)
                 )
             )
         }

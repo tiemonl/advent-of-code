@@ -11,7 +11,12 @@ class FileInputProvider(
 ) : InputProvider {
 
     override fun provideStringListInput(): List<String> =
-        readFile { readUtf8().lineSequence().toList() }
+        readFile {
+            readUtf8()
+                .lineSequence()
+                .toList()
+                .dropLastWhile { it.isBlank() }
+        }
 
     override fun provideStringInput(): String =
         readFile { readUtf8() }.trim()
@@ -30,14 +35,12 @@ class FileInputProvider(
                     val trimmed = line.trim()
                     if (trimmed.isEmpty()) return@mapNotNull null
 
-                    val tokens = if (trimmed.contains(" "))
+                    val tokens = if (trimmed.contains("\\s+".toRegex()))
                         trimmed.split("\\s+".toRegex())
                     else
                         listOf(trimmed)
 
-                    tokens.flatMap { token ->
-                        token.mapNotNull { it.digitToIntOrNull() }
-                    }.takeIf { !it.isEmpty() }
+                    tokens.mapNotNull { it.toIntOrNull() }.takeIf { it.isNotEmpty() }
                 }
                 .toList()
         }
