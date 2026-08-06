@@ -23,36 +23,36 @@ jobs:
           distribution: 'jetbrains'
           java-version: 21
 
-      - name: Cache Amper
+      - name: Cache Kotlin Toolchain
         uses: actions/cache@v4
         with:
-          path: ~/.cache/JetBrains/Amper
-          key: ${{ runner.os }}-amper-${{ hashFiles('amper', '**/module.yaml', '**/project.yaml') }}
+          path: ~/.cache/JetBrains/Kotlin
+          key: ${{ runner.os }}-kotlin-${{ hashFiles('kotlin', '**/module.yaml', '**/project.yaml') }}
           restore-keys: |
-            ${{ runner.os }}-amper-
+            ${{ runner.os }}-kotlin-
 
-      - name: Make amper executable
-        run: chmod +x ./amper
+      - name: Make kotlin executable
+        run: chmod +x ./kotlin
 
-      - name: Build with Amper
+      - name: Build with Kotlin Toolchain
         run: |
           set -euo pipefail
-          ./amper build
+          ./kotlin build
 
-      - name: Run tests with Amper
+      - name: Run tests with Kotlin Toolchain
         run: |
           set -euo pipefail
-          ./amper test
+          ./kotlin test
 
       - name: Upload Test Results
         uses: EnricoMi/publish-unit-test-result-action@v2
         if: always()  # still publish even if tests failed
         with:
           files: '**/build/reports/*/jvm/TEST-junit-jupiter.xml'
-          check_name: "Amper Tests"
+          check_name: "Kotlin Tests"
 
       - name: Update README progress
-        run: ./amper run -m pipeline --main-class dev.garlicbread.aoc.pipeline.ProgressReportKt
+        run: ./kotlin run -m pipeline --main-class dev.garlicbread.aoc.pipeline.ProgressReportKt
 
       - name: Commit README updates
         uses: stefanzweifel/git-auto-commit-action@v7
